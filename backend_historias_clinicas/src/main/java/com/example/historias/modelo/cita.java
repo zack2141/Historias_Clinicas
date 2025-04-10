@@ -31,7 +31,6 @@ public class cita {
 	@Column(name = "Motivo_Cita")
 	private Long motivoCita;
 	
-	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yy")
 	@Column(name = "Fecha")
