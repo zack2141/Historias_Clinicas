@@ -11,7 +11,6 @@ import com.example.historias.modelo.medico;
 
 import java.time.LocalTime;
 
-
 public interface In_Medico extends JpaRepository<medico, Long>{
 
 	@Query("SELECT m FROM medico m WHERE m.cargoMedico = :cargoMedico AND " +
