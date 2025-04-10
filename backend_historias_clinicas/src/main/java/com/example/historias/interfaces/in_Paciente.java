@@ -6,6 +6,10 @@ import com.example.historias.modelo.paciente;
 
 public interface in_Paciente extends JpaRepository<paciente, Long> {
 	
+
+	String findByCorreo(String correo);
+
 	paciente findByCorreo(String correo);
+
 
 }
