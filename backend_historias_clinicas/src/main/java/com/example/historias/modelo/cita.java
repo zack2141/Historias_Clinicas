@@ -29,17 +29,18 @@ public class cita {
 	private Long IDcita;
 	
 	@Column(name = "Motivo_Cita")
-	private Long motivoCita;
+	private String motivoCita;
 	
+	@Column(name = "Estado")
+	private String estado;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yy")
 	@Column(name = "Fecha")
 	private Date Fecha;
 	
-	@JsonFormat(pattern = "HH:mm")
 	@Column(name = "Hora")
-	private LocalTime hora;
+	private String hora;
 	
 	@ManyToOne()
 	@JoinColumn(name = "ID_Paciente", referencedColumnName = "ID_Paciente")
@@ -58,16 +59,21 @@ public class cita {
 		// TODO Auto-generated constructor stub
 	}
 
-	public cita(Long motivoCita, Date fecha, LocalTime hora, paciente iDpaciente, medico iDmedico,
+	
+
+	public cita(String motivoCita, String estado, Date fecha, String hora, paciente iDpaciente, medico iDmedico,
 			recepcionista iDrecepcionista) {
 		super();
 		this.motivoCita = motivoCita;
+		this.estado = estado;
 		Fecha = fecha;
 		this.hora = hora;
 		IDpaciente = iDpaciente;
 		IDmedico = iDmedico;
 		IDrecepcionista = iDrecepcionista;
 	}
+
+
 
 	public Long getIDcita() {
 		return IDcita;
@@ -77,11 +83,11 @@ public class cita {
 		IDcita = iDcita;
 	}
 
-	public Long getMotivoCita() {
+	public String getMotivoCita() {
 		return motivoCita;
 	}
 
-	public void setMotivoCita(Long motivoCita) {
+	public void setMotivoCita(String motivoCita) {
 		this.motivoCita = motivoCita;
 	}
 
@@ -93,11 +99,11 @@ public class cita {
 		Fecha = fecha;
 	}
 
-	public LocalTime getHora() {
+	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(LocalTime hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
 
@@ -124,5 +130,19 @@ public class cita {
 	public void setIDrecepcionista(recepcionista iDrecepcionista) {
 		IDrecepcionista = iDrecepcionista;
 	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	
 
 }
