@@ -31,6 +31,8 @@ public class cita {
 	@Column(name = "Motivo_Cita")
 	private String motivoCita;
 	
+	@Column(name = "Estado")
+	private String estado;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yy")
@@ -57,16 +59,21 @@ public class cita {
 		// TODO Auto-generated constructor stub
 	}
 
-	public cita(String motivoCita, Date fecha, String hora, paciente iDpaciente, medico iDmedico,
+	
+
+	public cita(String motivoCita, String estado, Date fecha, String hora, paciente iDpaciente, medico iDmedico,
 			recepcionista iDrecepcionista) {
 		super();
 		this.motivoCita = motivoCita;
+		this.estado = estado;
 		Fecha = fecha;
 		this.hora = hora;
 		IDpaciente = iDpaciente;
 		IDmedico = iDmedico;
 		IDrecepcionista = iDrecepcionista;
 	}
+
+
 
 	public Long getIDcita() {
 		return IDcita;
@@ -123,5 +130,19 @@ public class cita {
 	public void setIDrecepcionista(recepcionista iDrecepcionista) {
 		IDrecepcionista = iDrecepcionista;
 	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	
 
 }
