@@ -22,7 +22,7 @@ public class Medico {
 	@Autowired
     private In_Medico medicoRepositorio;
 	
-	@GetMapping("/medicoDisponibles")
+	@GetMapping("/medicosDisponibles")
     public List<medico> listaMedicosDisponibles(
             @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date Fecha,
             @RequestParam("hora") @DateTimeFormat(pattern = "HH:mm") LocalTime Hora,
