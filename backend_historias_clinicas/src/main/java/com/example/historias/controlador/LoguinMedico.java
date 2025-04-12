@@ -11,7 +11,7 @@ import com.example.historias.modelo.loguin_Medico;
 import com.example.historias.modelo.medico;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080/loguin/Medico")
+@CrossOrigin(origins = "/Medico")
 
 public class LoguinMedico {
 	
@@ -21,7 +21,7 @@ public class LoguinMedico {
 	    @Autowired
 	    private in_Loguin_Medico loguinMedicoRepo;
 
-	    @GetMapping("/LogueoMedico")
+	    @GetMapping("/Logueo")
 	    public String validarLogueo(@RequestParam String usuarioMedico, @RequestParam String passwordMedico) {
 	        loguin_Medico medico = loguinMedicoRepo.findByUsuarioMedicoAndPasswordMedico(usuarioMedico, passwordMedico);
 	        if (medico != null) {

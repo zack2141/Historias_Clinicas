@@ -15,24 +15,24 @@ import com.example.historias.modelo.paciente;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080/loguin/paciente")
+@CrossOrigin(origins = "/paciente")
 public class LoguinPaciente {
-	
-	public paciente usu;
+    
+    public paciente usu;
 
     @Autowired
     private in_Loguin_Paciente loguinPacienteRepo;
 
-    @GetMapping("/LogueoPaciente")
+    @GetMapping("/Logueo")
     public String validarLogueo(@RequestParam String usuarioPaciente, @RequestParam String password) {
         loguin_Paciente usuario = loguinPacienteRepo.findByUsuarioPacienteAndPassword(usuarioPaciente, password);
         if (usuario != null) {
-            paciente  usua= usuario.getIDpaciente();
-            usu=usua;
-            
-            String rol =usua.getRolPaciente();
+            paciente usua = usuario.getIDpaciente();
+            usu = usua;
+
+            String rol = usua.getRolPaciente();
             return rol;
-            
+
         } else {
             return "usuario o contraseña incorrectos";
         }
@@ -47,10 +47,9 @@ public class LoguinPaciente {
         return "usuario creado correctamente";
     }
 
-    @GetMapping("/CerrarSesionPaciente")
+    @GetMapping("/cerrarSesion")
     public String cerrarSesion() {
         usu = null;
         return "sesion cerrada correctamente";
     }
 }
-
