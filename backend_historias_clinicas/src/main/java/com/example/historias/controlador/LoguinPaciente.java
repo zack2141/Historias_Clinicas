@@ -1,10 +1,10 @@
 package com.example.historias.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +15,7 @@ import com.example.historias.modelo.paciente;
 
 
 @RestController
-@CrossOrigin(origins = "/paciente")
+@RequestMapping("/login/paciente")
 public class LoguinPaciente {
     
     public paciente usu;
@@ -23,7 +23,7 @@ public class LoguinPaciente {
     @Autowired
     private in_Loguin_Paciente loguinPacienteRepo;
 
-    @GetMapping("/Logueo")
+    @GetMapping("/LogueoPaciente")
     public String validarLogueo(@RequestParam String usuarioPaciente, @RequestParam String password) {
         loguin_Paciente usuario = loguinPacienteRepo.findByUsuarioPacienteAndPassword(usuarioPaciente, password);
         if (usuario != null) {
