@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ import com.example.historias.modelo.paciente;
 
 
 @RestController
-@CrossOrigin(origins = "/paciente")
+@RequestMapping("/loguin/Paciente")
 public class LoguinPaciente {
     
     public paciente usu;
@@ -38,14 +39,14 @@ public class LoguinPaciente {
         }
     }
 
-    @PostMapping("/Crear_usuario")
-    public String crearUsuario(@RequestBody loguin_Paciente usuarioPaciente) {
-        if (loguinPacienteRepo.findByUsuarioPaciente(usuarioPaciente.getUsuarioPaciente()) != null) {
-            return "el usuario ya existe";
+    public boolean crear_usuario(loguin_Paciente usuario) {
+        if (loguinPacienteRepo.findByUsuarioPaciente(usuario.getUsuarioPaciente()) != null) {
+            return false;
         }
-        loguinPacienteRepo.save(usuarioPaciente);
-        return "usuario creado correctamente";
+        loguinPacienteRepo.save(usuario);
+        return true;
     }
+
 
     @GetMapping("/cerrarSesionPaciente")
     public String cerrarSesion() {
