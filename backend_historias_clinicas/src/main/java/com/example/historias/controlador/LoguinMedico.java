@@ -21,7 +21,7 @@ public class LoguinMedico {
 	    @Autowired
 	    private in_Loguin_Medico loguinMedicoRepo;
 
-	    @GetMapping("/Logueo")
+	    @GetMapping("/LogueoMedico")
 	    public String validarLogueo(@RequestParam String usuarioMedico, @RequestParam String passwordMedico) {
 	        loguin_Medico medico = loguinMedicoRepo.findByUsuarioMedicoAndPasswordMedico(usuarioMedico, passwordMedico);
 	        if (medico != null) {
@@ -35,8 +35,8 @@ public class LoguinMedico {
 	            return "usuario o contraseña incorrectos";
 	        }
 	    }
-	    @GetMapping("/cerrarSesion")
-	    public String cerrarSesion() {
+	    @GetMapping("/CerrarSesionMedico")
+	    public String CerrarSesion() {
 	        medic = null;
 	        return "sesion cerrada correctamente";
 	    }

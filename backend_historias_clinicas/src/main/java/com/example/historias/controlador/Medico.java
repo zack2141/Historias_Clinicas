@@ -13,6 +13,7 @@ import com.example.historias.interfaces.In_Medico;
 import com.example.historias.modelo.medico;
 
 public class Medico {
+	
 	@Autowired
     private In_Medico medicoRepositorio;
 	
