@@ -13,7 +13,7 @@ import com.example.historias.modelo.paciente;
 
 
 @RestController
-@RequestMapping("/loguin/Paciente")
+@RequestMapping("/paciente")
 public class LoguinPaciente {
     
     public paciente usu;
@@ -21,7 +21,7 @@ public class LoguinPaciente {
     @Autowired
     private in_Loguin_Paciente loguinPacienteRepo;
 
-    @GetMapping("/Logueo")
+    @GetMapping("/LogueoPaciente")
     public String validarLogueo(@RequestParam String usuarioPaciente, @RequestParam String password) {
         loguin_Paciente usuario = loguinPacienteRepo.findByUsuarioPacienteAndPassword(usuarioPaciente, password);
         if (usuario != null) {

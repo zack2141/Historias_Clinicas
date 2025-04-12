@@ -14,7 +14,7 @@ import com.example.historias.modelo.loguin_Paciente;
 import com.example.historias.modelo.paciente;
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/Paciente")
 
 public class conPaciente {
 	
@@ -58,7 +58,7 @@ public class conPaciente {
 	    public boolean actualizaPaciente(@RequestBody paciente act) {
 	        if (!repPa.existsById(act.getIDpaciente())) return false;
 
-	        String correoExistente = repPa.findByCorreo(act.getCorreo());
+	        paciente correoExistente = repPa.findByCorreo(act.getCorreo());
 	        if (correoExistente != null && !act.getCorreo().equals(correoExistente)) {
 	            return false;
 	        }

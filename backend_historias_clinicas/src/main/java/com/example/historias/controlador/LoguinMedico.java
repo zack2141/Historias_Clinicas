@@ -1,7 +1,7 @@
 package com.example.historias.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +12,7 @@ import com.example.historias.modelo.loguin_Medico;
 import com.example.historias.modelo.medico;
 
 @RestController
-@RequestMapping("/loguin/Medico")
+@RequestMapping("/log/Medico")
 
 public class LoguinMedico {
 	
@@ -22,7 +22,7 @@ public class LoguinMedico {
 	    @Autowired
 	    private in_Loguin_Medico loguinMedicoRepo;
 
-	    @GetMapping("/Logueo")
+	    @GetMapping("/LogueoMedico")
 	    public String validarLogueo(@RequestParam String usuarioMedico, @RequestParam String passwordMedico) {
 	        loguin_Medico medico = loguinMedicoRepo.findByUsuarioMedicoAndPasswordMedico(usuarioMedico, passwordMedico);
 	        if (medico != null) {
