@@ -19,6 +19,7 @@ import com.example.historias.modelo.medico;
 @RequestMapping("http://localhost:8080/Medico")
 
 public class Medico {
+	
 	@Autowired
     private In_Medico medicoRepositorio;
 	

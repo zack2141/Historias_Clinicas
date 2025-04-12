@@ -23,7 +23,7 @@ public class LoguinPaciente {
     @Autowired
     private in_Loguin_Paciente loguinPacienteRepo;
 
-    @GetMapping("/Logueopaciente")
+    @GetMapping("/Logueo")
     public String validarLogueo(@RequestParam String usuarioPaciente, @RequestParam String password) {
         loguin_Paciente usuario = loguinPacienteRepo.findByUsuarioPacienteAndPassword(usuarioPaciente, password);
         if (usuario != null) {
@@ -47,7 +47,7 @@ public class LoguinPaciente {
         return "usuario creado correctamente";
     }
 
-    @GetMapping("/cerrarSesionPaciente")
+    @GetMapping("/cerrarSesion")
     public String cerrarSesion() {
         usu = null;
         return "sesion cerrada correctamente";
