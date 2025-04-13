@@ -1,11 +1,9 @@
 package com.example.historias.modelo;
 
-import java.time.LocalTime;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
