@@ -14,38 +14,51 @@ import com.example.historias.modelo.loguin_Paciente;
 import com.example.historias.modelo.paciente;
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/Paciente")
 
 public class conPaciente {
 	
 	    @Autowired
 	    private in_Paciente repPa;
 
-	    /*@Autowired
+	    @Autowired
 	    private in_Loguin_Paciente repLoPa;
 
-	    @Autowired
-	    //private conLoginPaciente conLoPa;
 
-	    Registro de Paciente
-	    @PostMapping("/RegistroPaciente")
-	    public boolean registrarPaciente(@RequestBody paciente nuevo, @RequestParam String usuarioPaciente) {
-	        if (repPa.existsById(nuevo.getIDpaciente()) || repPa.findByCorreo(nuevo.getCorreo()) != null) {
+	    @PostMapping("/registrar")
+	    public boolean registrarPacienteConLogin(
+	    		@RequestBody paciente nuevoPaciente, 
+	            @RequestParam String usuario, 
+	            @RequestParam String password) {
+	    	
+	        // Validar campos obligatorios
+	        if (nuevoPaciente.getCorreo() == null || nuevoPaciente.getNombres() == null ||
+	            nuevoPaciente.getApellidos() == null || usuario == null || password == null) {
+	            return false;
+	        }                             
+
+	        // Verificar si el correo o el usuario ya existen
+	        if (repPa.findByCorreo(nuevoPaciente.getCorreo()) != null || 
+	            repLoPa.findByUsuarioPaciente(usuario) != null) {
 	            return false;
 	        }
 
-	        repPa.save(nuevo);
+	        // Guardar paciente
+	        paciente pacienteGuardado = repPa.save(nuevoPaciente);
 
-	        loguin_Paciente nuevoLogin = new loguin_Paciente(usuarioPaciente, nuevo.getPassword(), nuevo);
-	        return conLoPa.crear_usuario(nuevoLogin);
-	    }*/
+	        // Crear login y guardar
+	        loguin_Paciente login = new loguin_Paciente(usuario, password, pacienteGuardado);
+	        repLoPa.save(login);
+
+	        return true;
+	    }
 
 	    //Actualizar Paciente
 	    @PostMapping("/ActualizarPaciente")
 	    public boolean actualizaPaciente(@RequestBody paciente act) {
 	        if (!repPa.existsById(act.getIDpaciente())) return false;
 
-	        String correoExistente = repPa.findByCorreo(act.getCorreo());
+	        paciente correoExistente = repPa.findByCorreo(act.getCorreo());
 	        if (correoExistente != null && !act.getCorreo().equals(correoExistente)) {
 	            return false;
 	        }
