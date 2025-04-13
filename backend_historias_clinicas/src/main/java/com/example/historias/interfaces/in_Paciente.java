@@ -9,8 +9,9 @@ public interface in_Paciente extends JpaRepository<paciente, Long> {
 
 	
 
-	paciente findByCorreo(String correo);
+	
 
+	public paciente findByCorreo(String correo);
 
 
 
