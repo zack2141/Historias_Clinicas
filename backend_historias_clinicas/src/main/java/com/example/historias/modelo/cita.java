@@ -1,26 +1,13 @@
 package com.example.historias.modelo;
 
-import java.time.LocalTime;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-
-@Entity  
-@Table(name ="Cita")
-
+@Entity
+@Table(name = "Cita")
 public class cita {
 	
 	@Id
@@ -37,8 +24,9 @@ public class cita {
 	@Column(name = "Fecha")
 	private Date Fecha;
 	
+	@JsonFormat(pattern = "HH:mm")
 	@Column(name = "Hora")
-	private String hora;
+	private LocalTime hora;
 	
 	@ManyToOne()
 	@JoinColumn(name = "ID_Paciente", referencedColumnName = "ID_Paciente")
@@ -52,14 +40,9 @@ public class cita {
 	@JoinColumn(name = "ID_Recepcionista", referencedColumnName = "ID_Recepcionista")
 	private recepcionista IDrecepcionista;
 
-	public cita() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public cita() {}
 
-	
-
-	public cita(Long motivoCita, Date fecha, String hora, paciente iDpaciente, medico iDmedico,
+	public cita(Long motivoCita, Date fecha, LocalTime hora, paciente iDpaciente, medico iDmedico,
 			recepcionista iDrecepcionista) {
 		super();
 		this.motivoCita = motivoCita;
@@ -70,72 +53,61 @@ public class cita {
 		IDrecepcionista = iDrecepcionista;
 	}
 
-
-
-	public Long getIDcita() {
-		return IDcita;
-	}
+    // Getters y Setters
+    public Long getIdCita() {
+        return idCita;
+    }
 
 	public void setIDcita(Long iDcita) {
 		IDcita = iDcita;
 	}
 
-	
-
 	public Long getMotivoCita() {
 		return motivoCita;
 	}
-
-
 
 	public void setMotivoCita(Long motivoCita) {
 		this.motivoCita = motivoCita;
 	}
 
+    public Date getFecha() {
+        return fecha;
+    }
 
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
-	public Date getFecha() {
-		return Fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		Fecha = fecha;
-	}
-
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
 
-	public paciente getIDpaciente() {
-		return IDpaciente;
-	}
+    public paciente getPaciente() {
+        return paciente;
+    }
 
-	public void setIDpaciente(paciente iDpaciente) {
-		IDpaciente = iDpaciente;
-	}
+    public void setPaciente(paciente paciente) {
+        this.paciente = paciente;
+    }
 
-	public medico getIDmedico() {
-		return IDmedico;
-	}
+    public medico getMedico() {
+        return medico;
+    }
 
-	public void setIDmedico(medico iDmedico) {
-		IDmedico = iDmedico;
-	}
+    public void setMedico(medico medico) {
+        this.medico = medico;
+    }
 
-	public recepcionista getIDrecepcionista() {
-		return IDrecepcionista;
-	}
+    public recepcionista getRecepcionista() {
+        return recepcionista;
+    }
 
 	public void setIDrecepcionista(recepcionista iDrecepcionista) {
 		IDrecepcionista = iDrecepcionista;
 	}
-
-
-
-	
 
 }

@@ -19,10 +19,11 @@ import com.example.historias.modelo.medico;
 @RequestMapping("http://localhost:8080/Medico")
 
 public class Medico {
+	
 	@Autowired
     private In_Medico medicoRepositorio;
 	
-	@GetMapping("/medicoDisponibles")
+	@GetMapping("/medicosDisponibles")
     public List<medico> listaMedicosDisponibles(
             @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date Fecha,
             @RequestParam("hora") @DateTimeFormat(pattern = "HH:mm") LocalTime Hora,
