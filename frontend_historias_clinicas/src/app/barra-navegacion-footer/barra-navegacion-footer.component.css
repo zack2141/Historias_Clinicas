@@ -1,14 +1,13 @@
 nav{
 
     align-items: center;
-    padding: 0% 0% 0% 3%; 
+    padding: 0% 0% 0% 1.5%; 
     color: white;
     display: flex;
 }
 
 footer{
 
-    margin-top: 100px;
 
     align-content: center;
     text-align: center;
@@ -29,18 +28,17 @@ body{
 
 }
 
-.estiloA{
-    margin-left: 1rem;
-}
 
 a{
     color: white;
     text-decoration: none;
+    margin-left: 1rem;
 }
 
 #menu-izquierda{
     width: 80%;
     float: left;
+    display: flex;
 }
 
 #menu-derecha{
@@ -50,14 +48,8 @@ a{
     display: none;
 }
 
-.paciente{
-    display: none;
-}
-
-.medico{
-    display: none;
-}
-
-.Recep{
-    display: none;
+#prueba{
+    width: 100%;
+    height: 80vh;
+    background-color: aqua;
 }

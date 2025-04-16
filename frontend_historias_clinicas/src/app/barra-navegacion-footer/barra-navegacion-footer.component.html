@@ -7,19 +7,32 @@
         <span> |</span>
 
         <!-- navegacion del paciente-->
-        <a href="" class="paciente estiloA">Solicitar Cita</a>
-        <a href="" class="paciente estiloA">Ver mis citas</a>
-        <a href="" class="paciente estiloA">Mi perfil</a>
+
+        <div #paciente class="paciente">
+
+            <a href="" >Solicitar Cita</a>
+            <a href="" >Ver mis citas</a>
+            <a href="" >Mi perfil</a>
+        </div>
+        
 
         <!-- navegacion del medico-->
 
-        <a href="" class="medico estiloA">Lista de pacientes</a>
+        <div #medico>
+
+            <a href="" >Lista de pacientes</a>
+
+        </div>
+        
 
         <!-- navegacion del recepcionista-->
 
-        <a href="" class="Recep estiloA">Citas</a>
-        <a href="" class="Recep estiloA">Agendar Citas</a>
+        <div #Recep>
+  
+            <a href=""  >Citas</a>
+            <a href=""  >Agendar Citas</a>
 
+        </div>
     </div>
     
 
@@ -34,6 +47,11 @@
 
 <!--contenido rotativo-->
 <router-outlet></router-outlet>
+
+<div #Loguin id="prueba">
+
+    loguins
+</div>
 
 <footer class="diseño-barras" >
     
