@@ -44,7 +44,7 @@ public class medico {
 	private String telefonoMedico;
 	
 	@Column(name="Direccion_Medico")
-	private String direcionMedico;
+	private String direccionMedico;
 	
 	@Column(name="Residencia_Medico")
 	private String residenciaMedico;
@@ -69,7 +69,7 @@ public class medico {
 		this.cargoMedico = cargoMedico;
 		this.correoMedico = correoMedico;
 		this.telefonoMedico = telefonoMedico;
-		this.direcionMedico = direcionMedico;
+		this.direccionMedico = direcionMedico;
 		this.residenciaMedico = residenciaMedico;
 		this.salarioMedico = salarioMedico;
 	}
@@ -147,11 +147,11 @@ public class medico {
 	}
 
 	public String getDirecionMedico() {
-		return direcionMedico;
+		return direccionMedico;
 	}
 
 	public void setDirecionMedico(String direcionMedico) {
-		this.direcionMedico = direcionMedico;
+		this.direccionMedico = direcionMedico;
 	}
 
 	public String getResidenciaMedico() {
