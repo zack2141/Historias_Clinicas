@@ -1,0 +1,63 @@
+nav{
+
+    align-items: center;
+    padding: 0% 0% 0% 3%; 
+    color: white;
+    display: flex;
+}
+
+footer{
+
+    margin-top: 100px;
+
+    align-content: center;
+    text-align: center;
+    color: white;
+
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.diseño-barras{
+
+    width: 100%;
+    height: 10vh;
+    background-color: #141e54;
+
+}
+
+.estiloA{
+    margin-left: 1rem;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+#menu-izquierda{
+    width: 80%;
+    float: left;
+}
+
+#menu-derecha{
+
+    width: 20%;
+    float: right;
+    display: none;
+}
+
+.paciente{
+    display: none;
+}
+
+.medico{
+    display: none;
+}
+
+.Recep{
+    display: none;
+}
