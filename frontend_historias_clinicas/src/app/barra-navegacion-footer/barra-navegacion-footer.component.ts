@@ -57,7 +57,6 @@ export class BarraNavegacionFooterComponent implements AfterViewInit {
     }
   }
 
-
   ver_Loguins(){
 
     this.renderer.setStyle(this.paciente.nativeElement,'display','none');
@@ -72,8 +71,6 @@ export class BarraNavegacionFooterComponent implements AfterViewInit {
     this.renderer.setStyle(this.log.nativeElement,'display','none');
 
   }
-
-  
 
   barra_paciente(){
 
@@ -101,8 +98,6 @@ export class BarraNavegacionFooterComponent implements AfterViewInit {
     this.renderer.setStyle(this.medico.nativeElement,'display','block');
     this.renderer.setStyle(this.Recep.nativeElement,'display','none');
     this.renderer.setStyle(this.log.nativeElement,'display','none');
-
-
 
   }
 
