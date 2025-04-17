@@ -12,12 +12,13 @@ import com.example.historias.modelo.medico;
 import java.time.LocalTime;
 
 public interface In_Medico extends JpaRepository<medico, Long>{
+	
 	@Query("SELECT m FROM medico m WHERE m.cargoMedico = :cargoMedico AND " +
 		       "NOT EXISTS (" +
-		       "   SELECT c FROM cita c WHERE c.medico = m AND c.fecha = :fecha AND c.hora = :hora" +
+		       "   SELECT c FROM cita c WHERE c.IDmedico = m AND c.fecha = :fecha AND c.hora = :hora" +
 		       ")")
 		List<medico> medicosDisponibles(@Param("hora") LocalTime hora,
-		                                @Param("fecha") Date fecha,
+		                                @Param("Fecha") Date fecha,
 		                                @Param("cargoMedico") String cargoMedico);
 
 }
