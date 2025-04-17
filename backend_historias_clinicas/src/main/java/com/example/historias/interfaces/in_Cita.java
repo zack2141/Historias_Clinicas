@@ -12,13 +12,13 @@ import com.example.historias.modelo.paciente;
 
 public interface in_Cita extends JpaRepository<cita, Long> {
 	
-	public List<cita>findByPacienteAndEstadoCi(paciente paciente,String estado );
+	public List<cita>findByIDpacienteAndEstado(paciente IDpaciente, String estado );
 	
-	public List<cita> findByIdmedicoAndFecha(medico med, Date fecha);
+	public List<cita> findByIDmedicoAndFecha(medico IDmedico, Date fecha);
 	
     public List<cita> findByFecha(Date fecha);
 
-    @Query("SELECT c FROM Cita c WHERE c.fecha = CURRENT_DATE")
+    @Query("SELECT c FROM cita c WHERE c.fecha = CURRENT_DATE")
     List<cita> citasDelDia();
 
 }
