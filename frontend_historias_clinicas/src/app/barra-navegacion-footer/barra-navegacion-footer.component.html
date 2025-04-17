@@ -1,0 +1,57 @@
+<nav class="diseño-barras">
+
+    <div id="menu-izquierda">
+
+        <a href="">Clinica</a>
+
+        <span> |</span>
+
+        <!-- navegacion del paciente-->
+
+        <div #paciente class="paciente">
+
+            <a href="" >Solicitar Cita</a>
+            <a href="" >Ver mis citas</a>
+            <a href="" >Mi perfil</a>
+        </div>
+        
+
+        <!-- navegacion del medico-->
+
+        <div #medico>
+
+            <a href="" >Lista de pacientes</a>
+
+        </div>
+        
+
+        <!-- navegacion del recepcionista-->
+
+        <div #Recep>
+  
+            <a href=""  >Citas</a>
+            <a href=""  >Agendar Citas</a>
+
+        </div>
+    </div>
+    
+
+
+    <div id="menu-derecha">
+         <a href="">Cerrar sesión</a>
+    </div>
+    
+
+
+</nav>
+
+<!--contenido rotativo-->
+<router-outlet></router-outlet>
+
+<app-inicio-secion #Loguin></app-inicio-secion>
+
+<footer class="diseño-barras" >
+    
+    &copy; 2024 ClinicaApp - sistema de gestión de Historias Clinicas
+
+</footer>
