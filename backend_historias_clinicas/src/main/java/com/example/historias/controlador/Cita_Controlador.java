@@ -1,7 +1,5 @@
 package com.example.historias.controlador;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,16 +18,13 @@ import com.example.historias.interfaces.In_Medico;
 import com.example.historias.interfaces.in_Cita;
 import com.example.historias.interfaces.in_Paciente;
 import com.example.historias.modelo.cita;
-import com.example.historias.modelo.loguin_Paciente;
 import com.example.historias.modelo.medico;
 import com.example.historias.modelo.paciente;
 import com.example.historias.modelo.recepcionista;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 
-import com.example.historias.modelo.loguin_Recepcionista;
 
 @RestController
 @RequestMapping("/Cita/")
@@ -69,7 +62,7 @@ public class Cita_Controlador {
 	@GetMapping("/agendarCitaPaciente")
 	public boolean agendarCitaPaciente(
 	        @RequestParam String motivo,
-	        @RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
+	        @RequestParam("Fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
 	        @RequestParam String hora,
 	        @RequestParam medico medicoId) {
 	
@@ -94,10 +87,10 @@ public class Cita_Controlador {
 	@GetMapping("/agendarCitaRecep")
 	public boolean agendarCitaRecep(
 	    @RequestParam String motivo,
-	    @RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
+	    @RequestParam("Fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
 	    @RequestParam String hora,
-	    @RequestParam medico idMedico, 
-	    @RequestParam paciente idPaciente
+	    @RequestParam medico IDMedico, 
+	    @RequestParam paciente IDPaciente
 	) {
 	    // Obtener al recepcionista logueado
 	    recepcionista recep = this.conLoRe.recepLogueado;
@@ -109,8 +102,8 @@ public class Cita_Controlador {
 
 
 	    // Buscar al médico y paciente por ID
-	    Optional<medico> medicoOptional = this.repME.findById(idMedico.getIDMedico());
-	    Optional<paciente> pacienteOptional = this.repPA.findById(idPaciente.getIDpaciente());
+	    Optional<medico> medicoOptional = this.repME.findById(IDMedico.getIDMedico());
+	    Optional<paciente> pacienteOptional = this.repPA.findById(IDPaciente.getIDpaciente());
 
 	    // Validar que el médico y el paciente existen
 	    if (!medicoOptional.isPresent() || !pacienteOptional.isPresent()) {
@@ -134,7 +127,7 @@ public class Cita_Controlador {
 		
 	
 		
-		return this.repCi.findByPacienteAndEstadoCi(paci,"pendiente");
+		return this.repCi.findByIDpacienteAndEstado(paci,"pendiente");
 		
 		}
 	
@@ -143,7 +136,7 @@ public class Cita_Controlador {
 		
 		paciente paci = this.conLoPa.usu;
 		
-		return this.repCi.findByPacienteAndEstadoCi(paci,"asignada");
+		return this.repCi.findByIDpacienteAndEstado(paci,"asignada");
 		
 		}
 	
@@ -161,7 +154,7 @@ public class Cita_Controlador {
 				
 	}
 	
-	@GetMapping("/ListaPacientes")
+	@GetMapping("/ListaPacientesPorFecha")
 	public List<cita> verListaPacientes(
 	    
 	        @RequestParam("fecha1") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha) {
@@ -175,7 +168,7 @@ public class Cita_Controlador {
 	   
 
 	    // Obtener las citas por médico y fecha
-	    List<cita> citas = this.repCi.findByIdmedicoAndFecha(medi, fecha);
+	    List<cita> citas = this.repCi.findByIDmedicoAndFecha(medi, fecha);
 
 	    return citas;
 	}
@@ -235,14 +228,14 @@ public class Cita_Controlador {
 	@GetMapping("/citasPaciente")
 	public List<cita> verCitaspaciente(
 	    @RequestParam("fecha1") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
-	    @RequestParam Long idpaciente
+	    @RequestParam Long IDpaciente
 	) {
 	    // Obtenemos todas las citas de esa fecha
 	    List<cita> citasDeLaFecha = this.repCi.findByFecha(fecha);
 
 	    // Filtramos solo las que pertenecen al paciente solicitado
 	    return citasDeLaFecha.stream()
-	        .filter(c -> c.getIDpaciente().getIDpaciente().equals(idpaciente))
+	        .filter(c -> c.getIDpaciente().getIDpaciente().equals(IDpaciente))
 	        .collect(Collectors.toList());
 	}
 	
