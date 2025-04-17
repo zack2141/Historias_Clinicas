@@ -17,8 +17,8 @@ import com.example.historias.modelo.medico;
 
 
 @RestController
-@RequestMapping("http://localhost:8080/Medico")
-@CrossOrigin(origins = "http://localhost:8080/")
+@RequestMapping("/Medico")
+@CrossOrigin(origins = "http://localhost:4200/")
 
 public class Medico {
 	

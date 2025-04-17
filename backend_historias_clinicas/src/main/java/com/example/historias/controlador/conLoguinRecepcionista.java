@@ -13,7 +13,7 @@ import com.example.historias.modelo.recepcionista;
 
 @RestController
 @RequestMapping("/loguin/Recepcionista")
-@CrossOrigin(origins = "http://localhost:8080/")
+@CrossOrigin(origins = "http://localhost:4200/")
 
 public class conLoguinRecepcionista {
 	
