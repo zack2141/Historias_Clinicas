@@ -28,7 +28,7 @@ import jakarta.persistence.PersistenceContext;
 
 @RestController
 @RequestMapping("/Cita/")
-@CrossOrigin(origins = "http://localhost:8080/")
+@CrossOrigin(origins = "http://localhost:4200/")
 
 public class Cita_Controlador {
 	
