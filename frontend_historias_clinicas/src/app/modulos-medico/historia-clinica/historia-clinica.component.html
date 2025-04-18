@@ -1,1 +1,56 @@
-<p>historia-clinica works!</p>
+<div class="contenedor-historia">
+    <h4>Historial médico</h4>
+  
+    <div class="datos-paciente">
+      <table>
+        <tr>
+          <td><strong>Identificación</strong></td>
+          <td>{{ paciente.identificacion }}</td>
+          <td><strong>Nombres</strong></td>
+          <td>{{ paciente.nombres }}</td>
+          <td><strong>Apellidos</strong></td>
+          <td>{{ paciente.apellidos }}</td>
+        </tr>
+        <tr>
+          <td><strong>Fecha de nacimiento</strong></td>
+          <td>{{ paciente.fechaNacimiento }}</td>
+          <td><strong>Sexo</strong></td>
+          <td>{{ paciente.sexo }}</td>
+          <td><strong>Estado Civil</strong></td>
+          <td>{{ paciente.estadoCivil }}</td>
+        </tr>
+        <tr>
+          <td><strong>Afiliación</strong></td>
+          <td>{{ paciente.afiliacion }}</td>
+          <td><strong>RH</strong></td>
+          <td>{{ paciente.rh }}</td>
+        </tr>
+      </table>
+    </div>
+  
+    <form (ngSubmit)="Guardar_historial()">
+      <label>Motivo de la consulta</label>
+      <input [(ngModel)]="nueva_historia.motivoConsulta" name="motivoConsulta" />
+  
+      <label>Enfermedades actuales del paciente</label>
+      <input [(ngModel)]="nueva_historia.enfermedadesActuales" name="enfermedadesActuales" />
+  
+      <label>Diagnóstico</label>
+      <input [(ngModel)]="nueva_historia.diagnostico" name="diagnostico" />
+  
+      <label>Observaciones</label>
+      <textarea [(ngModel)]="nueva_historia.observaciones" name="observaciones"></textarea>
+  
+      <label>Exámenes complementarios</label>
+      <input [(ngModel)]="nueva_historia.examenes" name="examenes" />
+  
+      <label>Medicamentos</label>
+      <input [(ngModel)]="nueva_historia.medicamentos" name="medicamentos" />
+  
+      <label>Tratamientos</label>
+      <textarea [(ngModel)]="nueva_historia.tratamientos" name="tratamientos"></textarea>
+  
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+  
