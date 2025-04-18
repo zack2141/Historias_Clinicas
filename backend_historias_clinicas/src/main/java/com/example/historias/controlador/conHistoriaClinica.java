@@ -16,8 +16,7 @@ import com.example.historias.modelo.historia_Clinica;
 
 @RestController
 @RequestMapping("/Ver/HistorialClinico")
-@CrossOrigin(origins = "http://localhost:4200/")
-
+@CrossOrigin(origins = "http://localhost:8080/")
 public class conHistoriaClinica {
 	
 	@Autowired
