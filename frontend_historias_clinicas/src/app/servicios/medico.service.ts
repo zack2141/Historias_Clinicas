@@ -13,7 +13,7 @@ export class MedicoService {
   constructor(private http: HttpClient) { }
 
   listaMedicosDisponibles(fecha: Date, hora: string, cargo: string): Observable<any[]> {
-    const fechaFormateada = formatDate(fecha, 'yyyy-MM-dd', 'en-US');
+    const fechaFormateada = formatDate(fecha, 'dd-MM-yyyy', 'en-US');
 
     const params = new HttpParams()
       .set('fecha', fechaFormateada)
