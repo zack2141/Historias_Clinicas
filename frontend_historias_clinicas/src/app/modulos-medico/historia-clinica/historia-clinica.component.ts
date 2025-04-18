@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HistoriaClinicaService } from '../../servicios/historia-clinica.service';
 import { Router } from '@angular/router';
+import { HistorialClinico } from '../../entidades/historial-clinico';
 
 
 @Component({
@@ -13,17 +14,10 @@ import { Router } from '@angular/router';
 })
 export class HistoriaClinicaComponent implements OnInit {
 
-  nueva_historia: any = {
-    motivoConsulta: '',
-    enfermedadesActuales: '',
-    diagnostico: '',
-    observaciones: '',
-    examenes: '',
-    medicamentos: '',
-    tratamientos: ''
-  };
+  
 
   paciente: any = {}; 
+  nueva_historia: HistorialClinico = new HistorialClinico();
 
   constructor(
     private ServiceHistorial: HistoriaClinicaService,

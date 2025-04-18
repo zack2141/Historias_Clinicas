@@ -1,4 +1,4 @@
-/* Contenedor principal */
+
 .container {
   max-width: 1000px;
   margin: 50px auto;
@@ -9,7 +9,6 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Título */
 h2 {
   text-align: center;
   margin-bottom: 30px;
@@ -17,14 +16,12 @@ h2 {
   color: #333;
 }
 
-/* Estructura del formulario */
 form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Filas del formulario */
 .form-row {
   display: flex;
   flex-wrap: wrap;
@@ -32,21 +29,21 @@ form {
   width: 100%;
 }
 
-/* Grupo de campos */
+
 .form-group {
   flex: 1 1 calc(50% - 20px);
   display: flex;
   flex-direction: column;
 }
 
-/* Etiquetas */
+
 .form-group label {
   font-weight: 500;
   margin-bottom: 6px;
   color: #444;
 }
 
-/* Inputs y selects */
+
 .form-group input,
 .form-group select {
   padding: 10px;
@@ -57,21 +54,19 @@ form {
   color: #333;
 }
 
-/* Placeholder */
 .form-group input::placeholder,
 .form-group select::placeholder {
   color: #aaa;
   font-style: italic;
 }
 
-/* Enfocado */
+
 .form-group input:focus,
 .form-group select:focus {
   border-color: #888;
   outline: none;
 }
 
-/* Botón */
 button {
   margin: 30px auto 0;
   display: block;
@@ -85,9 +80,13 @@ button {
   transition: background-color 0.3s;
 }
 
-/* Hover botón */
 button:hover {
   background-color: #c9302c;
+}
+
+.Password{
+  float: left;
+  width: 49%;
 }
 
 /* Responsive para pantallas pequeñas */
