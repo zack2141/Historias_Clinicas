@@ -1,1 +1,37 @@
-<p>lista-pacientes works!</p>
+<div class="nav-bar">
+    <div class="nav-left">
+      <strong>Clínica (Médico)</strong>
+      <span class="separator">|</span>
+      <span>Lista de pacientes</span>
+    </div>
+    <div class="nav-right">
+      <a href="#">Cerrar sesión</a>
+    </div>
+  </div>
+  
+  <div class="main-container">
+    <h2>Lista de pacientes</h2>
+    <input type="date" [(ngModel)]="fechaSeleccionada" />
+  
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Identificación</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Motivo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>03-28-2025</td>
+            <td>8:00 AM</td>
+            <td>102208519</td>
+            <td>Juan David</td>
+            <td>Grisalez Ortega</td>
+            <td>Dolor estomacal</td>
+  
