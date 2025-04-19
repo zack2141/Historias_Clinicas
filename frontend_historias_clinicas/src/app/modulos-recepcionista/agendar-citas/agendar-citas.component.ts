@@ -25,6 +25,7 @@ export class AgendarCitasComponent implements OnInit {
   ){}
 
 medico!:Medico[];
+med: Medico= new Medico;
 paciente: Paciente = new Paciente;
 fecha!:Date;
 hora!:string;
@@ -34,7 +35,7 @@ cargo!:string;
 
 
 solicitar_cita_paciente(){
-  this.ServiceCita.agendar_cita_recep(this.fecha, this.hora, this.motivo, this.medico,this.paciente).subscribe(dato=>{
+  this.ServiceCita.agendar_cita_recep(this.fecha, this.hora, this.motivo, this.med,this.paciente).subscribe(dato=>{
     
   })
 }
