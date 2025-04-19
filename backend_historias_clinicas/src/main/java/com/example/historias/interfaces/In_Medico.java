@@ -18,7 +18,7 @@ public interface In_Medico extends JpaRepository<medico, Long>{
 		       "   SELECT c FROM cita c WHERE c.IDmedico = m AND c.fecha = :fecha AND c.hora = :hora" +
 		       ")")
 		List<medico> medicosDisponibles(@Param("hora") String hora,
-		                                @Param("Fecha") Date fecha,
+				                        @Param("fecha") Date fecha,
 		                                @Param("cargoMedico") String cargoMedico);
 
 }

@@ -19,4 +19,8 @@ export class PacienteService {
 
     return this.http.post<boolean>(`${this.UrlPaciente}/registrar`, nuevo, { params });
   }
+
+ /* buscarPacientePorIdentificacion(identificacion: string): Observable<Paciente> {
+    return this.http.get<Paciente>(`${this.UrlPaciente}/pacientes/${identificacion}`);
+  }*/
 }

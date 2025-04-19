@@ -1,1 +1,68 @@
-<p>ver-citas works!</p>
+<div>
+  
+    <main class="contenido">
+      <section class="citas-proximas" *ngIf="mostrarProximas">
+        <h2>Próximas citas</h2>
+  
+        <table *ngIf="citas.length > 0">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Motivo</th>
+              <th>Cargo</th>
+              <th>Médico</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cita of citas">
+              <td>{{ cita.fecha | date: 'MM-dd-yyyy' }}</td>
+              <td>{{ cita.hora }}</td>
+              <td>{{ cita.motivo }}</td>
+              <td>{{ cita.idMedico.cargoMedico }}</td>
+              <td>{{ cita.idMedico.nombreMedico }} {{ cita.idMedico.apellidosMedico }}</td>
+              <td>
+                <button class="btn-cancelar" (click)="cancelar_cita(cita.idCita)">Cancelar cita</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <p *ngIf="citas.length === 0">No tienes citas próximas.</p>
+  
+        <button class="btn-historial" (click)="ocultar_tabla_citas_proximas()">Ver historial de citas</button>
+      </section>
+  
+      <section class="citas-anteriores" *ngIf="!mostrarProximas">
+        <h2>Historial de citas</h2>
+  
+        <table *ngIf="citasAnteriores.length > 0">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Motivo</th>
+              <th>Cargo</th>
+              <th>Médico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cita of citasAnteriores">
+              <td>{{ cita.fecha | date: 'MM-dd-yyyy' }}</td>
+              <td>{{ cita.hora }}</td>
+              <td>{{ cita.motivo }}</td>
+              <td>{{ cita.idMedico.cargoMedico }}</td>
+              <td>{{ cita.idMedico.nombreMedico }} {{ cita.idMedico.apellidosMedico }}</td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <p *ngIf="citasAnteriores.length === 0">No hay historial de citas disponible.</p>
+  
+        <button class="btn-historial" (click)="mostrarProximas = true">Ver próximas citas</button>
+      </section>
+    </main>
+  
+  </div>
+  
