@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { PacienteService } from '../../servicios/paciente.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class RegistroPacienteComponent {
   usuario: string = '';
   password: string = '';
 
-  constructor(private serpa: PacienteService) {}
+  constructor(private serpa: PacienteService, private router: Router) {}
 
 registrar() {
   this.serpa.registrar_paciente(this.paciente, this.usuario, this.password)
@@ -29,7 +30,9 @@ registrar() {
             title: 'Registro exitoso',
             showConfirmButton: false,
             timer: 2000
-          });
+          }).then(() => {
+            this.router.navigate(['/inicio-sesion']); 
+          }); 
         } else {
           Swal.fire({
             icon: 'error',
