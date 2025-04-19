@@ -12,7 +12,7 @@ import com.example.historias.modelo.loguin_Medico;
 import com.example.historias.modelo.medico;
 
 @RestController
-@RequestMapping("/log/Medico")
+@RequestMapping("/Loguin")
 @CrossOrigin(origins = "http://localhost:4200/")
 
 public class LoguinMedico {

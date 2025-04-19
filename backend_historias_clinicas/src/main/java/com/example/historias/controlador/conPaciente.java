@@ -44,6 +44,8 @@ public class conPaciente {
 	            repLoPa.findByUsuarioPaciente(usuario) != null) {
 	            return false;
 	        }
+	        
+	        nuevoPaciente.setRolPaciente("Paciente");
 
 	        // Guardar paciente
 	        paciente pacienteGuardado = repPa.save(nuevoPaciente);

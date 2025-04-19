@@ -1,13 +1,14 @@
 
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { BarraNavegacionFooterComponent } from './barra-navegacion-footer/barra-navegacion-footer.component';
-import { InicioSecionComponent } from './inicio-secion/inicio-secion.component';
+import { RegistroPacienteComponent } from './modulos-pacientes/registro-paciente/registro-paciente.component';
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,InicioSecionComponent, BarraNavegacionFooterComponent],
+  imports: [BarraNavegacionFooterComponent, RegistroPacienteComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
