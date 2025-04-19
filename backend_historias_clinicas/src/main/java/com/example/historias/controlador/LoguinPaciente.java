@@ -14,7 +14,7 @@ import com.example.historias.modelo.paciente;
 
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/Loguin")
 @CrossOrigin(origins = "http://localhost:4200/")
 
 public class LoguinPaciente {

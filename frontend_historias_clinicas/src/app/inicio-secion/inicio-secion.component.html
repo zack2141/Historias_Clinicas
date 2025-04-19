@@ -1,4 +1,6 @@
-<div class="container">
+<ng-container *ngIf="mostrarLogin">
+<div class="fondo" >
+<div class="container" >
     <div class="card login-card">
       <h2>Inicio de sesión</h2>
   
@@ -14,16 +16,19 @@
   
       <p class="registro">
         ¿Todavía no estás registrado? Regístrate
-        <a routerLink="/registro-paciente">aquí</a>.
+        <a (click)="irARegistroPaciente()">aquí</a>.
       </p>
+      
     </div>
   
     <div class="card bienvenida-card">
       <h3>¡Te damos la Bienvenida a nuestro Sitio Web!</h3>
-      <img src="https://www.shutterstock.com/image-photo/happy-family-meeting-doctor-hospital-600w-1693310454.jpg" alt="Bienvenida" />
+      <img src="assets/paciente-hospital-dia.jpg" alt="Bienvenida" />
       <p>
         Tú como paciente debes de disfrutar de las mejores experiencias, ahora con nuestra nuevo Sitio Web podrás hacerlo.
       </p>
     </div>
   </div>
+</div>
+</ng-container>
   

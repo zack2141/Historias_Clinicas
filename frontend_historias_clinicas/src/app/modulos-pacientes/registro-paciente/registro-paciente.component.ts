@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { PacienteService } from '../../servicios/paciente.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,25 +18,38 @@ export class RegistroPacienteComponent {
   usuario: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private serpa: PacienteService, private router: Router) {}
 
-  registrar() {
-    const params = new HttpParams()
-      .set('usuario', this.usuario)
-      .set('password', this.password);
-
-    this.http.post<boolean>('http://localhost:8080/registrar', this.paciente, { params })
-      .subscribe({
-        next: respuesta => {
-          if (respuesta) {
-            alert('Registro exitoso');
-          } else {
-            alert('Error al registrar');
-          }
-        },
-        error: () => alert('Error al conectar con el servidor')
-      });
-  }
+registrar() {
+  this.serpa.registrar_paciente(this.paciente, this.usuario, this.password)
+    .subscribe({
+      next: (respuesta) => {
+        if (respuesta) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            showConfirmButton: false,
+            timer: 2000
+          }).then(() => {
+            this.router.navigate(['/inicio-sesion']); 
+          }); 
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al registrar',
+            text: 'No se pudo completar el registro.'
+          });
+        }
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de conexión',
+          text: 'No se pudo conectar con el servidor.'
+        });
+      }
+    });
 }
 
-
+  
+}

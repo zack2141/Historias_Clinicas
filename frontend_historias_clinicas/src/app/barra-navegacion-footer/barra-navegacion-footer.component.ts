@@ -5,7 +5,7 @@ import { InicioSecionComponent } from '../inicio-secion/inicio-secion.component'
 @Component({
   selector: 'app-barra-navegacion-footer',
   standalone: true,
-  imports: [RouterOutlet, InicioSecionComponent],
+  imports: [RouterOutlet],
   templateUrl: './barra-navegacion-footer.component.html',
   styleUrl: './barra-navegacion-footer.component.css'
 })
