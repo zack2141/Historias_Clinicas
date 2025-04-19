@@ -21,7 +21,8 @@ export class AgendarCitasComponent implements OnInit {
   }
 
   constructor(private ServiceCita:CitaService,
-    private ServiceMedico:MedicoService
+    private ServiceMedico:MedicoService,
+    
   ){}
 
 medico!:Medico[];
@@ -40,11 +41,32 @@ solicitar_cita_paciente(){
   })
 }
 
-medico_encontrado(){
-  this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato=>{
-
-  })
+medico_encontrado() {
+  this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato => {
+    this.medico = dato;
+    console.log("Médicos disponibles:", this.medico);
+  });
 }
+/*
+identificacionBuscada: string = ""; // lo que escribe el usuario
 
+  buscarPaciente() {
+    if (this.identificacionBuscada.trim() === "") {
+      alert("Ingrese una identificación válida");
+      return;
+    }
+
+    this.ServicePaciente.buscarPacientePorIdentificacion(this.identificacionBuscada).subscribe(
+      (resp: Paciente) => {
+        this.paciente = resp;
+      },
+      err => {
+        alert("Paciente no encontrado");
+        this.paciente = new Paciente();
+      }
+    );
+  }
+
+  */
 }
 

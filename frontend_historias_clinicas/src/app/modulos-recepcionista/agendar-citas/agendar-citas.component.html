@@ -5,6 +5,11 @@
       <input type="text" placeholder="102208519" />
       <button class="btn-rojo">Buscar paciente</button>
     </div>
+
+    <!--<div class="busqueda-paciente">
+  <input [(ngModel)]="identificacionBuscada" placeholder="102208519" />
+  <button (click)="buscarPaciente()">Buscar paciente</button>
+</div>-->
   
     <div class="tabla-paciente">
       <table>
@@ -57,11 +62,24 @@
            Agrega más horas aquí 
         </select>
       </div>
+
+      <div class="campo">
+        <label>Ingrese el cargo del medico</label>
+        <select [(ngModel)]="cargo"(change)="medico_encontrado()">
+          <option value="" disabled selected>Seleccione cargo</option>
+          <option value="General">General</option>
+          <option value="Cardiologo">Cardiologo</option>
+          <option value="Urolologo">Urolologo</option>
+
+        </select>
+
+      </div>
   
       <div class="campo">
         <label>Médico asignado</label>
-        <select [(ngModel)]="medico">
-          <option *ngFor="let m of medico" [value]="m">{{ m.nombresMedico }} {{ m.apellidosMedico }} ({{ m.cargoMedico }})</option>
+        <select [(ngModel)]="med">
+          <option value="" disabled selected>Seleccione un médico</option>
+          <option *ngFor="let m of medico" [ngValue]="m">{{ m.nombreMedico }} {{ m.apellidosMedico }}</option>
         </select>
       </div>
   

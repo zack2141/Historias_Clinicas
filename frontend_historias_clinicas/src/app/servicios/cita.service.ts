@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medico } from '../entidades/medico';
 import { Paciente } from '../entidades/paciente';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +16,15 @@ export class CitaService {
   }
 
   private bdURL="http://localhost:8080/Cita"
-  /*+ agendar_cita_paciente
-  (fecha:Date,hora:String, 
-  motivo:String, med:medico)/Get*/
+
 
   agendar_cita(
     fecha:Date,
     Hora:String,
     Motivo:String,
-    med:Medico):Observable<any>{
-      return this.httpClient.get(`${this.bdURL}/agendarCitaPaciente?motivo=${Motivo}&`+`Fecha=${fecha}`+
+    med:number):Observable<any>{
+      const fechaFormateada = formatDate(fecha, 'dd/MM/yyyy', 'en-US');
+      return this.httpClient.get(`${this.bdURL}/agendarCitaPaciente?motivo=${Motivo}&`+`Fecha=${fechaFormateada}`+
         `&hora=${Hora}`+`&medico=${med}`
       );
     }

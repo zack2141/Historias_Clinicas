@@ -88,3 +88,18 @@
     cursor: pointer;
   }
   
+  .buscar-btn {
+    background-color: #50bffb;  /* celeste brillante */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px; /* bordes redondeados */
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .buscar-btn:hover {
+    background-color: #3caee2; /* un poco más oscuro al pasar el mouse */
+  }

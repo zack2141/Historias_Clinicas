@@ -26,7 +26,7 @@ constructor(private Servicecita:CitaService,
 fecha!: Date;
 hora!: string;
 motivo!: string;
-med: Medico= new Medico;
+med!:Medico;
 Medicos!:Medico[];
 cargo!:string;
 
@@ -36,26 +36,28 @@ cargo!:string;
 
 
 solicitar_cita_paciente() {
-  this.Servicecita.agendar_cita(this.fecha, this.hora, this.motivo, this.med).subscribe(dato=>{
+  console.log("Médico seleccionado:", this.med); // 👈 Agregá esto
 
-      if(dato){
-        alert("Cita Agendada")
+  if (!this.med || !this.med.idMedico) {
+    alert("Por favor seleccione un médico antes de confirmar.");
+    return;
+  }
 
-        
-        window.location.reload()
-      }else{
-        alert("La solicitud a fallado")
-      }
-
+  this.Servicecita.agendar_cita(this.fecha, this.hora, this.motivo, this.med.idMedico).subscribe(dato => {
+    if (dato) {
+      alert("Cita Agendada");
+      window.location.reload();
+    } else {
+      alert("La solicitud ha fallado");
     }
-     
-    );
+  });
 }
 
-medico_encontrado(){
-  this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato=>{
-this.Medicos=dato;
-  })
+medico_encontrado() {
+  this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato => {
+    this.Medicos = dato;
+    console.log("Médicos disponibles:", this.Medicos);
+  });
 }
 
 }
