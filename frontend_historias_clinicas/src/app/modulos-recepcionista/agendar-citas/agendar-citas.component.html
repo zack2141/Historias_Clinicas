@@ -1,1 +1,72 @@
-<p>agendar-citas works!</p>
+<!--<div class="contenedor-principal">
+    <h2>Agendar citas</h2>
+  
+    <div class="buscador">
+      <input type="text" placeholder="102208519" />
+      <button class="btn-rojo">Buscar paciente</button>
+    </div>
+  
+    <div class="tabla-paciente">
+      <table>
+        <thead>
+          <tr>
+            <th>Identificación</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Fecha de nacimiento</th>
+            <th>Teléfono</th>
+            <th>Correo electrónico</th>
+            <th>Sexo</th>
+            <th>Estado Civil</th>
+            <th>Dirección</th>
+            <th>Afiliación</th>
+            <th>RH</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ paciente.idPaciente }}</td>
+            <td>{{ paciente.nombres }}</td>
+            <td>{{ paciente.apellidos }}</td>
+            <td>{{ paciente.fechaNacimiento}}</td>
+            <td>{{ paciente.telefono }}</td>
+            <td>{{ paciente.correo }}</td>
+            <td>{{ paciente.sexo }}</td>
+            <td>{{ paciente.estadoCivil }}</td>
+            <td>{{ paciente.direccion }}</td>
+            <td>{{ paciente.afiliacion }}</td>
+            <td>{{ paciente.rh }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="formulario-cita">
+      <div class="campo">
+        <label>Seleccione una fecha</label>
+        <input type="date" [(ngModel)]="fecha" (change)="medico_encontrado()" />
+      </div>
+  
+      <div class="campo">
+        <label>Ingrese una hora disponible</label>
+        <select [(ngModel)]="hora" (change)="medico_encontrado()">
+          <option value="">Seleccione una hora</option>
+          <option value="08:00">08:00</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+           Agrega más horas aquí 
+        </select>
+      </div>
+  
+      <div class="campo">
+        <label>Médico asignado</label>
+        <select [(ngModel)]="medico">
+          <option *ngFor="let m of medico" [value]="m">{{ m.nombresMedico }} {{ m.apellidosMedico }} ({{ m.cargoMedico }})</option>
+        </select>
+      </div>
+  
+      <button class="btn-azul" (click)="solicitar_cita_paciente()">Agendar</button>
+    </div>
+  </div>
+  
+-->
