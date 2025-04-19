@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Medico } from '../../entidades/medico';
 import {Cita} from '../../entidades/cita';
 import { CommonModule } from '@angular/common';
+import { MedicoService } from '../../servicios/medico.service';
 
 @Component({
   selector: 'app-solicitar-cita',
@@ -18,24 +19,29 @@ ngOnInit(): void{
 
 }
 
-constructor(private CitasServicios:CitaService){}
-
+constructor(private Servicecita:CitaService,
+  private ServiceMedico:MedicoService
+){}
+/*ServicePaciente: serpa, Servicecita:serci*/
 fecha!: Date;
 hora!: string;
 motivo!: string;
-med!: Medico;
+med: Medico= new Medico;
+Medicos!:Medico[];
+cargo!:string;
 
-cita: Cita= new Cita;
 
-citas!: Cita[];
 
-agendarCita() {
-  this.CitasServicios.agendar_cita(this.fecha, this.hora, this.motivo, this.med).subscribe(dato=>{
+
+
+
+solicitar_cita_paciente() {
+  this.Servicecita.agendar_cita(this.fecha, this.hora, this.motivo, this.med).subscribe(dato=>{
 
       if(dato){
         alert("Cita Agendada")
 
-        this.cita=dato;
+        
         window.location.reload()
       }else{
         alert("La solicitud a fallado")
@@ -44,6 +50,12 @@ agendarCita() {
     }
      
     );
+}
+
+medico_encontrado(){
+  this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato=>{
+this.Medicos=dato;
+  })
 }
 
 }
