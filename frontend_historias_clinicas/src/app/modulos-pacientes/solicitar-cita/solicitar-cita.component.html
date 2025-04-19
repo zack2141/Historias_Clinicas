@@ -1,4 +1,4 @@
-<!--<p>solicitar-cita works!</p>
+
 <div class="contenedor-solicitud">
     <h2>Solicitar cita</h2>
   
@@ -9,18 +9,19 @@
             <th>Fecha</th>
             <th>Hora</th>
             <th>Motivo</th>
+            <th>Cargo</th>
             <th>Médico</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <Fecha 
+            
             <td>
               <input type="date" [(ngModel)]="fecha" (change)="medico_encontrado()" />
             </td>
   
-             Hora 
+            
             <td>
               <select [(ngModel)]="hora" (change)="medico_encontrado()">
                 <option value="" disabled selected>Seleccione una hora</option>
@@ -31,12 +32,22 @@
               </select>
             </td>
   
-             Motivo 
+             
             <td>
               <input type="text" placeholder="Escriba el motivo de la consulta" [(ngModel)]="motivo" />
             </td>
+
+            <td>
+              <select [(ngModel)]="cargo" (change)="medico_encontrado()">
+                <option value="" disabled selected>Seleccione el cargo</option>
+                <option value="General">General</option>
+                <option value="Cardiologo">Cardiologo</option>
+                <option value="Urolologo">Urolologo</option>
+              </select>
+            
+              </td>
   
-             Médico 
+             
             <td>
               <select [(ngModel)]="med">
                 <option value="" disabled selected>Seleccione un médico</option>
@@ -46,7 +57,7 @@
               </select>
             </td>
   
-             Botón 
+             
             <td>
               <button class="confirmar-btn" (click)="solicitar_cita_paciente()">Confirmar cita</button>
             </td>
@@ -56,5 +67,5 @@
     </div>
   </div>
 
--->
+
   
