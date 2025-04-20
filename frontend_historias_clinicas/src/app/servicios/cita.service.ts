@@ -59,13 +59,12 @@ export class CitaService {
     );
   }
 
-
   pacientes_Cita_Medico(
-    fecha:Date
-  ):Observable<any>{
-    return this.httpClient.get(`${this.bdURL}/ListaPacientesPorFecha?fecha1=${fecha}`
-    );
+    fecha: string
+  ): Observable<any> {
+    return this.httpClient.get(`${this.bdURL}/ListaPacientesPorFecha?fecha1=${fecha}`);
   }
+  
 
   ingreso_Paciente(
     idcita:number

@@ -58,20 +58,31 @@ public class conPaciente {
 	    }
 
 	    @PostMapping("/ActualizarPaciente")
-	    public boolean actualizaPaciente(@RequestBody paciente act) {
-	        // Verificar si el paciente existe por ID
+	    public boolean actualizaPaciente(
+	            @RequestBody paciente act,
+	            @RequestParam String usuario,
+	            @RequestParam String password) {
+
 	        if (!repPa.existsById(act.getIDpaciente())) {
 	            return false;
 	        }
 
-	        // Verificar si el correo ya está registrado por otro paciente
 	        paciente otroPaciente = repPa.findByCorreo(act.getCorreo());
 	        if (otroPaciente != null && !otroPaciente.getIDpaciente().equals(act.getIDpaciente())) {
 	            return false;
 	        }
 
-	        // Actualizar información del paciente
+	        // Actualiza paciente
 	        repPa.save(act);
+
+	        // Actualiza login del paciente
+	        loguin_Paciente log = repLoPa.findById(String.valueOf(act.getIDpaciente())).orElse(null);
+	        if (log != null) {
+	            log.setUsuarioPaciente(usuario);
+	            log.setPassword(password);
+	            repLoPa.save(log);
+	        }
+
 	        return true;
 	    }
 

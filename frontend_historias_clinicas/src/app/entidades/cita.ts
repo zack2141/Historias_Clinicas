@@ -7,5 +7,6 @@ hora!:String
 fecha!:Date
 idMedico!:Medico
 idPaciente!:Paciente
+motivoCita !: string
 
 }
