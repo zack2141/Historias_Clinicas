@@ -62,26 +62,25 @@ public class Cita_Controlador {
 	@GetMapping("/agendarCitaPaciente")
 	public boolean agendarCitaPaciente(
 	        @RequestParam String motivo,
-	        @RequestParam("Fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
+	        @RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
 	        @RequestParam String hora,
-	        @RequestParam medico medicoId) {
-	
-	paciente paci = this.conLoPa.usu;
-		
-   
-		
-	    Optional<medico> medicoOptional = this.repME.findById(medicoId.getIDMedico());
-	    if (!medicoOptional.isPresent()){
-	   return false;
-	   }
+	        @RequestParam("medico") Long idMedico) {
+
+	    paciente paci = this.conLoPa.usu;
+
+	    Optional<medico> medicoOptional = this.repME.findById(idMedico);
+	    if (!medicoOptional.isPresent()) {
+	        return false;
+	    }
+
 	    medico med = medicoOptional.get();
-	    
-	    // Crear y guardar la nueva cita (el estado lo podés mapear si es numérico)
-	    cita nuevaCita = new cita(motivo, "asignada", fecha, hora, paci, med, null);
+
+	    cita nuevaCita = new cita(motivo, "Asignada", fecha, hora, paci, med, null);
 	    this.repCi.save(nuevaCita);
 
 	    return true;
 	}
+
 
 	
 	@GetMapping("/agendarCitaRecep")
@@ -114,7 +113,7 @@ public class Cita_Controlador {
 	    paciente pac = pacienteOptional.get();
 
 	   
-	    cita nuevaCita = new cita(motivo, "asignada", fecha, hora, pac, med, recep);
+	    cita nuevaCita = new cita(motivo, "Asignada", fecha, hora, pac, med, recep);
 	    this.repCi.save(nuevaCita);
 
 	    return true;
@@ -127,7 +126,7 @@ public class Cita_Controlador {
 		
 	
 		
-		return this.repCi.findByIDpacienteAndEstado(paci,"pendiente");
+		return this.repCi.findByIDpacienteAndEstado(paci,"Asignada");
 		
 		}
 	
@@ -136,7 +135,7 @@ public class Cita_Controlador {
 		
 		paciente paci = this.conLoPa.usu;
 		
-		return this.repCi.findByIDpacienteAndEstado(paci,"asignada");
+		return this.repCi.findByIDpacienteAndEstado(paci,"Atendida");
 		
 		}
 	
@@ -188,7 +187,7 @@ public class Cita_Controlador {
 		
 		cita ingreso=this.repCi.findById(id).get();
 		
-		ingreso.setEstado("ingresado");
+		ingreso.setEstado("Ingresado");
 		
 		this.repCi.save(ingreso);
 		
@@ -202,7 +201,7 @@ public class Cita_Controlador {
 		
 		cita asistencia=this.repCi.findById(id).get();
 		
-		asistencia.setEstado("atendido");
+		asistencia.setEstado("Atendida");
 		
 		this.repCi.save(asistencia);
 		
