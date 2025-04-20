@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HistoriaClinicaService } from '../../servicios/historia-clinica.service';
 import { Router } from '@angular/router';
 import { HistorialClinico } from '../../entidades/historial-clinico';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -32,20 +33,38 @@ export class HistoriaClinicaComponent implements OnInit {
     }
   }
   
-
   Guardar_historial(): void {
+    if (!this.nueva_historia.motivo || !this.nueva_historia.diagnostico) {
+      Swal.fire('Campos incompletos', 'Por favor llena los campos requeridos.', 'warning');
+      return;
+    }
+
+   
+
     const historiaCompleta = {
       ...this.nueva_historia,
       paciente: this.paciente
     };
 
+    Swal.fire({
+      title: 'Guardando historial...',
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      allowOutsideClick: false
+    });
+
     this.ServiceHistorial.registrarHistorial(historiaCompleta).subscribe(
       (respuesta) => {
-        alert('Historial registrado exitosamente');
-        this.redireccion_lista_pacientes();
+        Swal.close();
+        Swal.fire('Éxito', 'Historial registrado exitosamente.', 'success').then(() => {
+          this.redireccion_lista_pacientes();
+        });
       },
       (error) => {
-        alert('Error al registrar el historial');
+        Swal.close();
+        Swal.fire('Error', 'Hubo un problema al registrar el historial.', 'error');
+        console.error(error);
       }
     );
   }
@@ -53,5 +72,4 @@ export class HistoriaClinicaComponent implements OnInit {
   redireccion_lista_pacientes(): void {
     this.router.navigate(['/lista-pacientes']);
   }
-
 }

@@ -8,5 +8,6 @@ fecha!:Date
 motivo!:String
 idMedico!:Medico
 idPaciente!:Paciente
+motivoCita !: string
 
 }

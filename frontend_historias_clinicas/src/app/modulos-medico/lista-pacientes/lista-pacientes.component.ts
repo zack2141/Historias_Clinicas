@@ -1,14 +1,80 @@
 import { FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Cita } from '../../entidades/cita';
+
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { CitaService } from '../../servicios/cita.service';
 
 @Component({
   selector: 'app-lista-pacientes',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './lista-pacientes.component.html',
   styleUrl: './lista-pacientes.component.css'
 })
-export class ListaPacientesComponent {
-fechaSeleccionada: any;
+export class ListaPacientesComponent implements OnInit{
 
+  lista_citas: Cita[] = [];
+  fechaSeleccionada: string = '';
+
+  constructor(
+    private servicioCitas: CitaService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    const hoy = new Date();
+    this.fechaSeleccionada = hoy.toISOString().split('T')[0];
+    this.ver_lista_pacientes();
+  }
+
+  ver_lista_pacientes(): void {
+    if (!this.fechaSeleccionada) {
+      Swal.fire('Advertencia', 'Por favor selecciona una fecha.', 'warning');
+      return;
+    }
+
+    const fecha = new Date(this.fechaSeleccionada);
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+    const anio = fecha.getFullYear();
+    const fechaFormateada = `${dia}/${mes}/${anio}`; // Formato correcto para el backend
+
+    console.log('Fecha seleccionada:', this.fechaSeleccionada);
+    console.log('Fecha formateada para enviar al backend:', fechaFormateada);
+
+    Swal.fire({
+      title: 'Buscando pacientes...',
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      allowOutsideClick: false
+    });
+
+    this.servicioCitas.pacientes_Cita_Medico(fechaFormateada).subscribe(
+      (data: Cita[]) => {
+        Swal.close();
+        this.lista_citas = data;
+
+        console.log('Citas recibidas del backend:', data);
+
+        if (data.length === 0) {
+          Swal.fire('Sin resultados', 'No hay pacientes agendados para esta fecha.', 'info');
+        }
+      },
+      error => {
+        Swal.close();
+        Swal.fire('Error', 'No se pudo obtener la lista de pacientes.', 'error');
+        console.error('Error al obtener pacientes:', error);
+      }
+    );
+  }
+
+  redireccion_historia(cita: Cita): void {
+    this.router.navigate(['/historia-clinica'], {
+      queryParams: { idCita: cita.idCita }
+    });
+  }
 }
