@@ -160,7 +160,7 @@ public class Cita_Controlador {
 	        @RequestParam("fecha1") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha) {
 
 	 
-        medico medi = this.conLoMe.medic;
+        medico medi = this.conLoMe.medic.getIDmedico();
 	    if (medi ==null) {
 	        return new ArrayList<>(); // Retorna lista vacía si el médico no existe
 	    }

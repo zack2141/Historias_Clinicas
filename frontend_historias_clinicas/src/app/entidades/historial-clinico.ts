@@ -4,15 +4,14 @@ import { Paciente } from './paciente';
 export class HistorialClinico {
 
   idHistorial !:number
-  diagnostico !:String
+  diagnosticos !:String
   observaciones !:String
-  motivo !:String
   enfermedadPaciente !:String
   tratamientos !:String
   recetaMedicamentos !:String
-  examenesComplementarios !:String
-  idPaciente !:Paciente
-  idMedico !:Medico
+  examenesComplementario !:String
+  idpaciente !:Paciente | null
+  idmedico !:Medico |null
   motivoCita !:String
 
 }

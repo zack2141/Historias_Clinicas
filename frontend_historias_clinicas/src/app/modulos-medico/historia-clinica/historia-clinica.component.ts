@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { Cita } from '../../entidades/cita';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common'
+import { Paciente } from '../../entidades/paciente';
 
 
 @Component({
@@ -54,7 +55,19 @@ export class HistoriaClinicaComponent implements OnInit {
       afiliacion: ''
     }
   };
-  nueva_historia: HistorialClinico = new HistorialClinico();
+
+  nueva_historia: HistorialClinico ={
+    recetaMedicamentos: '',
+    motivoCita: '',
+    enfermedadPaciente: '',
+    observaciones: '',
+    examenesComplementario: '',
+    diagnosticos: '',
+    idmedico: null,
+    idpaciente : null,
+    idHistorial: 0,
+    tratamientos: ""
+  }
 
   constructor(
     private ServiceHistorial: HistoriaClinicaService,
@@ -67,6 +80,8 @@ export class HistoriaClinicaComponent implements OnInit {
 
     if (state && state.cita) {
       this.cita = state.cita;
+
+      this.nueva_historia.idpaciente = this.cita.idpaciente
       console.log("✅ Cita recibida:", this.cita);
     } else {
       console.warn("⚠️ No se recibió la cita.");
@@ -74,17 +89,12 @@ export class HistoriaClinicaComponent implements OnInit {
   }
   
   Guardar_historial(): void {
-    if (!this.nueva_historia.motivo || !this.nueva_historia.diagnostico) {
+    if ( !this.nueva_historia.diagnosticos) {
       Swal.fire('Campos incompletos', 'Por favor llena los campos requeridos.', 'warning');
       return;
     }
 
-   
-
-    const historiaCompleta = {
-      ...this.nueva_historia,
-      paciente: this.cita
-    };
+  
 
     Swal.fire({
       title: 'Guardando historial...',
@@ -94,7 +104,7 @@ export class HistoriaClinicaComponent implements OnInit {
       allowOutsideClick: false
     });
 
-    this.ServiceHistorial.registrarHistorial(historiaCompleta).subscribe(
+    this.ServiceHistorial.registrarHistorial(this.nueva_historia, this.cita.idcita).subscribe(
       (respuesta) => {
         Swal.close();
         Swal.fire('Éxito', 'Historial registrado exitosamente.', 'success').then(() => {

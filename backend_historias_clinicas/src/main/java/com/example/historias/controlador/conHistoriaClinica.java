@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.historias.interfaces.in_Historia_Clinica;
@@ -22,11 +23,32 @@ public class conHistoriaClinica {
 	@Autowired
 	private in_Historia_Clinica repHistoriaClinica;
 	
+	
+	@Autowired
+	private LoguinMedico LogMedico;
+	
+	@Autowired
+	private Cita_Controlador conCita;
+	
+	
+	
 	@PostMapping("/guardarHistorialClinico")
-	public String guardarHistorial(@RequestBody historia_Clinica historia) {
+	public String guardarHistorial(@RequestBody historia_Clinica historia, @RequestParam Long idcita) {
 	    try {
-	    	repHistoriaClinica.save(historia);
-	        return "Historial clínico registrado correctamente.";
+	    	
+	    	boolean resul =this.conCita.asistenciaPaciente(idcita);
+	    	
+	    	if(resul == true) {
+	    		historia.setIDmedico(this.LogMedico.medic.getIDmedico());	
+	    		repHistoriaClinica.save(historia);
+	    		return "Historial clínico registrado correctamente.";
+	    		
+	    	}else {
+	    		return "Error al registrar historial.";
+	    	}
+	    	
+	    	
+	    	
 	    } catch (Exception e) {
 	        return "Error al registrar historial.";
 	    }
