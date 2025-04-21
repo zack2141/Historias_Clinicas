@@ -6,6 +6,7 @@ import {Cita} from '../../entidades/cita';
 import { CommonModule } from '@angular/common';
 import { MedicoService } from '../../servicios/medico.service';
 import { LogueosService } from '../../servicios/logueos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-solicitar-cita',
@@ -52,16 +53,35 @@ solicitar_cita_paciente() {
 
 
   if (!this.med || !this.med.idmedico) {
-    alert("Por favor seleccione un médico antes de confirmar.");
+    
+    Swal.fire({
+                      icon: 'warning',
+                      title: 'por favor, seleccione un medico antes de agendar la cita',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+
+    
+
     return;
   }
 
   this.Servicecita.agendar_cita(this.fecha, this.hora, this.motivo, this.med.idmedico).subscribe(dato => {
     if (dato) {
-      alert("Cita Agendada");
+      Swal.fire({
+        icon: 'success',
+        title: 'La cita ha sido agendada ',
+        showConfirmButton: false,
+        timer: 2000
+      })
       window.location.reload();
     } else {
-      alert("La solicitud ha fallado");
+      Swal.fire({
+        icon: 'success',
+        title: 'fallo en la solicitud ',
+        showConfirmButton: false,
+        timer: 2000
+      })
     }
   });
 }
@@ -70,6 +90,14 @@ medico_encontrado() {
   this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato => {
     this.Medicos = dato;
     console.log("Médicos disponibles:", this.Medicos);
+
+    if(this.Medicos.length===0){
+      Swal.fire({
+        icon: 'warning',
+        title: 'no hay medicos disponibles',
+        showConfirmButton: true
+      })
+    }
   });
 
   
