@@ -10,6 +10,7 @@ import { AgendarCitasComponent } from './modulos-recepcionista/agendar-citas/age
 import { ListaCitasComponent } from './modulos-recepcionista/lista-citas/lista-citas.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'inicio-sesion', pathMatch: 'full' },
     {path: 'inicio-sesion', component:InicioSecionComponent},
     {path: 'historia-clinica', component:HistoriaClinicaComponent},
     {path: 'lista-pacientes', component:ListaPacientesComponent},

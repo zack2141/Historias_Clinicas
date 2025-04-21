@@ -16,7 +16,7 @@ import com.example.historias.modelo.paciente;
 
 @RestController
 @RequestMapping("/Paciente")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class conPaciente {
 	
@@ -44,6 +44,8 @@ public class conPaciente {
 	            repLoPa.findByUsuarioPaciente(usuario) != null) {
 	            return false;
 	        }
+	        
+	        nuevoPaciente.setRolPaciente("Paciente");
 
 	        // Guardar paciente
 	        paciente pacienteGuardado = repPa.save(nuevoPaciente);
@@ -55,19 +57,35 @@ public class conPaciente {
 	        return true;
 	    }
 
-	    //Actualizar Paciente
 	    @PostMapping("/ActualizarPaciente")
-	    public boolean actualizaPaciente(@RequestBody paciente act) {
-	        if (!repPa.existsById(act.getIDpaciente())) return false;
+	    public boolean actualizaPaciente(
+	            @RequestBody paciente act,
+	            @RequestParam String usuario,
+	            @RequestParam String password) {
 
-	        paciente correoExistente = repPa.findByCorreo(act.getCorreo());
-	        if (correoExistente != null && !act.getCorreo().equals(correoExistente)) {
+	        if (!repPa.existsById(act.getIDpaciente())) {
 	            return false;
 	        }
 
+	        paciente otroPaciente = repPa.findByCorreo(act.getCorreo());
+	        if (otroPaciente != null && !otroPaciente.getIDpaciente().equals(act.getIDpaciente())) {
+	            return false;
+	        }
+
+	        // Actualiza paciente
 	        repPa.save(act);
+
+	        // Actualiza login del paciente
+	        loguin_Paciente log = repLoPa.findById(String.valueOf(act.getIDpaciente())).orElse(null);
+	        if (log != null) {
+	            log.setUsuarioPaciente(usuario);
+	            log.setPassword(password);
+	            repLoPa.save(log);
+	        }
+
 	        return true;
 	    }
+
 
 	    //Obtener datos del paciente
 	    @GetMapping("/ObtenerPaciente")

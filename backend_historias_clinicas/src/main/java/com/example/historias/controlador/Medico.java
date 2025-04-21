@@ -1,6 +1,6 @@
 package com.example.historias.controlador;
 
-import java.time.LocalTime;
+
 import java.util.Date;
 import java.util.List;
 
@@ -27,8 +27,8 @@ public class Medico {
 	
 	@GetMapping("/medicosDisponibles")
     public List<medico> listaMedicosDisponibles(
-            @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date Fecha,
-            @RequestParam("hora") @DateTimeFormat(pattern = "HH:mm") LocalTime Hora,
+            @RequestParam("fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date Fecha,
+            @RequestParam("hora") String Hora,
             @RequestParam("cargo") String cargoMedico
     ) {
         return medicoRepositorio.medicosDisponibles(Hora, Fecha, cargoMedico);

@@ -2,80 +2,88 @@ import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { LoginsService } from '../servicios/logins.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-inicio-secion',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './inicio-secion.component.html',
   styleUrls: ['./inicio-secion.component.css']
 })
 export class InicioSecionComponent {
 
-  tipoUsuario: string = '';
   usuario: string = '';
   password: string = '';
-  mensaje: string = '';
+
+  mostrarLogin: boolean = true;
 
   constructor(private loginService: LoginsService, private router: Router) {}
 
   iniciarSesion() {
-    this.validar();
-  }
 
-  validar() {
-    switch (this.tipoUsuario) {
-      case 'medico':
-        this.medico_sesion(this.usuario, this.password);
-        break;
-      case 'paciente':
-        this.paciente_sesion(this.usuario, this.password);
-        break;
-      case 'recepcionista':
-        this.recep_sesion(this.usuario, this.password);
-        break;
-    }
-  }
-
-  medico_sesion(usuario: string, password: string) {
-    this.loginService.loginMedico(usuario, password).subscribe(
+    this.loginService.loginMedico(this.usuario, this.password).subscribe(
       res => {
-        this.mensaje = res;
-        if (res === 'ok') this.vista_medico();
+        if (res !== 'usuario o contraseña incorrectos') {
+          // Si el login fue exitoso como médico
+          Swal.fire('¡Bienvenido!', 'Sesión iniciada como médico.', 'success').then(() => {
+            this.vista_medico();
+          });
+        } else {
+         
+          this.loginService.loginPaciente(this.usuario, this.password).subscribe(
+            res2 => {
+              if (res2 !== 'usuario o contraseña incorrectos') {
+                Swal.fire('¡Bienvenido!', 'Sesión iniciada como paciente.', 'success').then(() => {
+                  this.vista_paciente();
+                });
+              } else {
+               
+                this.loginService.loginRecepcionista(this.usuario, this.password).subscribe(
+                  res3 => {
+                    if (res3 !== 'Credenciales incorrectas') {
+                      Swal.fire('¡Bienvenido!', 'Sesión iniciada como recepcionista.', 'success').then(() => {
+                        this.vista_recep();
+                      });
+                    } else {
+                      
+                      Swal.fire('Error', 'Usuario o contraseña incorrectos.', 'error');
+                    }
+                  }
+                );
+              }
+            }
+          );
+        }
       },
-      err => this.mensaje = 'error al iniciar sesion como medico'
-    );
-  }
-
-  paciente_sesion(usuario: string, password: string) {
-    this.loginService.loginPaciente(usuario, password).subscribe(
-      res => {
-        this.mensaje = res;
-        if (res === 'ok') this.vista_paciente();
-      },
-      err => this.mensaje = 'error al iniciar sesion como paciente'
-    );
-  }
-
-  recep_sesion(usuario: string, password: string) {
-    this.loginService.loginRecepcionista(usuario, password).subscribe(
-      res => {
-        this.mensaje = res;
-        if (res === 'ok') this.vista_recep();
-      },
-      err => this.mensaje = 'error al iniciar sesión como recepcionista'
-    );
-  }
+      err => {
+        Swal.fire('Error', 'Error al conectar con el servidor.', 'error');
+      }
+  );
+}
 
   vista_medico() {
-    this.router.navigate(['/vista-medico']);
+    this.mostrarLogin = false;
+    this.router.navigate(['/lista-pacientes']);
+
   }
 
   vista_paciente() {
-    this.router.navigate(['/vista-paciente']);
+    console.log('Antes de cambiar:', this.mostrarLogin);
+    this.mostrarLogin = false;
+    this.router.navigate(['/ver-citas']);
+    console.log('Después de cambiar:', this.mostrarLogin);
   }
 
   vista_recep() {
-    this.router.navigate(['/vista-recepcionista']);
+    this.mostrarLogin = false;
+    this.router.navigate(['/lista-citas']);
+  }
+
+
+  irARegistroPaciente() {
+    this.mostrarLogin = false;
+    this.router.navigate(['/registro-paciente']); 
   }
 }
