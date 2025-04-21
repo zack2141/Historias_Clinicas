@@ -5,6 +5,8 @@ import { CitaService } from '../../servicios/cita.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LogueosService } from '../../servicios/logueos.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ver-citas',
@@ -25,7 +27,8 @@ export class VerCitasComponent implements OnInit {
 
   constructor(private ServicePaciente:PacienteService,
     private Servicecita:CitaService,
-     private logueoService: LogueosService
+     private logueoService: LogueosService,
+      private router: Router
   ){}
 
   ngOnInit(): void {
@@ -56,7 +59,16 @@ export class VerCitasComponent implements OnInit {
 
   cancelar_cita(idcita: number): void {
     this.Servicecita.cancelar_Cita(idcita).subscribe(() => {
-      this.citas_proximas(); // refrescar citas
+
+      Swal.fire({
+                  icon: 'success',
+                  title: 'La cita ha sido cancelada',
+                  showConfirmButton: false,
+                  timer: 3000
+                }).then(() => { 
+                  this.citas_proximas(); // refrescar citas
+                }); 
+     
     });
   }
 
