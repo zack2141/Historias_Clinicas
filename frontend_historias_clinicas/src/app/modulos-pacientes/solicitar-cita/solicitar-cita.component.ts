@@ -71,17 +71,19 @@ solicitar_cita_paciente() {
       Swal.fire({
         icon: 'success',
         title: 'La cita ha sido agendada ',
-        showConfirmButton: false,
-        timer: 2000
-      })
-      window.location.reload();
+        showConfirmButton: true
+      }).then(() => { 
+        window.location.reload();; // refrescar citas
+      }); 
+      
     } else {
       Swal.fire({
         icon: 'success',
         title: 'fallo en la solicitud ',
-        showConfirmButton: false,
-        timer: 2000
-      })
+        showConfirmButton: true
+      }).then(() => { 
+        window.location.reload();; // refrescar citas
+      }); 
     }
   });
 }

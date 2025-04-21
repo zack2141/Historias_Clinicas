@@ -11,7 +11,6 @@
         <tr>
           <th>Fecha</th>
           <th>Hora</th>
-          <th>Identificación</th>
           <th>Nombres</th>
           <th>Apellidos</th>
           <th>Motivo</th>
@@ -22,7 +21,6 @@
         <tr *ngFor="let cita of lista_citas">
           <td>{{ cita.fecha | date: 'dd-MM-yyyy' }}</td>
           <td>{{ cita.hora }}</td>
-          <td>{{ cita.idpaciente.idPaciente }}</td>
           <td>{{ cita.idpaciente.nombres }}</td>
           <td>{{ cita.idpaciente.apellidos }}</td>
           <td>{{ cita.motivoCita }}</td>
