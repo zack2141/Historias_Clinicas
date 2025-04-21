@@ -23,8 +23,7 @@ export class CitaService {
     Hora:String,
     Motivo:String,
     med:number):Observable<any>{
-      const fechaFormateada = formatDate(fecha, 'dd/MM/yyyy', 'en-US');
-      return this.httpClient.get(`${this.bdURL}/agendarCitaPaciente?motivo=${Motivo}&`+`Fecha=${fechaFormateada}`+
+      return this.httpClient.get(`${this.bdURL}/agendarCitaPaciente?motivo=${Motivo}&`+`Fecha=${fecha}`+
         `&hora=${Hora}`+`&medico=${med}`
       );
     }

@@ -1,6 +1,6 @@
 export class Medico {
 
-  idMedico !:number
+  idmedico !:number
   residenciaMedico !:String
   telefonoMedico !:String
   direccionMedico !:String

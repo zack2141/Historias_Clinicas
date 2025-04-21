@@ -8,45 +8,50 @@
 
         <!-- navegacion del paciente-->
 
-        <div #paciente class="paciente">
+        <div *ngIf="tipoUsuario === 'paciente'"class="paciente">
 
-            <a href="" >Solicitar Cita</a>
-            <a href="" >Ver mis citas</a>
-            <a href="" >Mi perfil</a>
+            <a href="/solicitar-cita" >Solicitar Cita</a>
+            <a href="/ver-citas" >Ver mis citas</a>
+            <a href="/actualizar-paciente" >Mi perfil</a>
+
+            
+           
         </div>
         
 
         <!-- navegacion del medico-->
 
-        <div #medico>
+        <div *ngIf="tipoUsuario === 'medico'">
 
-            <a href="" >Lista de pacientes</a>
+            <a href="/lista-pacientes" >Lista de pacientes</a>
 
         </div>
         
 
         <!-- navegacion del recepcionista-->
 
-        <div #Recep>
+        <div *ngIf="tipoUsuario === 'recep'">
   
-            <a href=""  >Citas</a>
-            <a href=""  >Agendar Citas</a>
+            <a href="/lista-citas"  >Citas</a>
+            <a href="/agendar-citas"  >Agendar Citas</a>
 
         </div>
     </div>
-    
 
-
-    <div id="menu-derecha">
-         <a href="">Cerrar sesión</a>
-    </div>
+    <div class="menu-derecha" *ngIf="tipoUsuario === 'paciente'||tipoUsuario === 'recep' || tipoUsuario === 'medico'" > 
+        <a href="">Cerrar sesión</a>
+   </div>
     
 
 
 </nav>
 
 <!--contenido rotativo-->
-<router-outlet></router-outlet>
+
+<div id="contenido-rotativo">
+    <router-outlet></router-outlet>
+</div>
+
 
 
 <footer class="diseño-barras" >

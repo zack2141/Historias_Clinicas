@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { PacienteService } from '../../servicios/paciente.service';
 import { Router } from '@angular/router';
+import { LogueosService } from '../../servicios/logueos.service';
 
 
 @Component({
@@ -19,6 +20,9 @@ export class RegistroPacienteComponent {
   password: string = '';
 
   constructor(private serpa: PacienteService, private router: Router) {}
+
+  // funcion que muestra la barra de navegacion como paciente
+ 
 
 registrar() {
   this.serpa.registrar_paciente(this.paciente, this.usuario, this.password)

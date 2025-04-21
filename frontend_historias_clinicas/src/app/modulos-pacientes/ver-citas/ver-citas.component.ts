@@ -4,6 +4,7 @@ import { PacienteService } from '../../servicios/paciente.service';
 import { CitaService } from '../../servicios/cita.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LogueosService } from '../../servicios/logueos.service';
 
 @Component({
   selector: 'app-ver-citas',
@@ -14,27 +15,42 @@ import { CommonModule } from '@angular/common';
 })
 export class VerCitasComponent implements OnInit {
 
-  citas!:Cita[]
+  citas!:Cita[];
+
+  cantcitas!: number;
+  cantanteriores!:number;
   citasAnteriores: Cita[] = [];
   mostrarProximas: boolean = true;
+  aside:boolean =true;
 
   constructor(private ServicePaciente:PacienteService,
-    private Servicecita:CitaService
+    private Servicecita:CitaService,
+     private logueoService: LogueosService
   ){}
 
   ngOnInit(): void {
     this.citas_proximas();
+    this.SesionComoPaciente()
   }
+
+  // funcion que muestra la barra de navegacion como paciente
+  SesionComoPaciente() {
+    this.logueoService.setTipoUsuario('paciente');
+  }
+
 
   citas_proximas(): void {
     this.Servicecita.ver_Proximas_Citas().subscribe(data => {
       this.citas = data;
+      console.log(this.citas)
+      this.cantcitas = this.citas.length
     });
   }
 
   citas_anteriores(): void {
     this.Servicecita.ver_historial_citas().subscribe(data => {
       this.citasAnteriores = data;
+      this.cantanteriores = this.citasAnteriores.length;
     });
   }
 
@@ -47,6 +63,7 @@ export class VerCitasComponent implements OnInit {
   ocultar_tabla_citas_proximas(): void {
     this.mostrarProximas = false;
     this.citas_anteriores();
+    this.aside =false;
   }
 }
 

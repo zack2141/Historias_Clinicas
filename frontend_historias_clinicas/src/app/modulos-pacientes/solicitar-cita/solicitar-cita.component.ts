@@ -5,6 +5,7 @@ import { Medico } from '../../entidades/medico';
 import {Cita} from '../../entidades/cita';
 import { CommonModule } from '@angular/common';
 import { MedicoService } from '../../servicios/medico.service';
+import { LogueosService } from '../../servicios/logueos.service';
 
 @Component({
   selector: 'app-solicitar-cita',
@@ -15,20 +16,31 @@ import { MedicoService } from '../../servicios/medico.service';
 })
 export class SolicitarCitaComponent implements OnInit{
 
-ngOnInit(): void{
 
-}
 
 constructor(private Servicecita:CitaService,
-  private ServiceMedico:MedicoService
+  private ServiceMedico:MedicoService,
+  private logueoService: LogueosService
 ){}
+
+ngOnInit(): void{
+
+  this.SesionComoPaciente()
+}
+
+// funcion que muestra la barra de navegacion como paciente
+SesionComoPaciente() {
+  this.logueoService.setTipoUsuario('paciente');
+}
 /*ServicePaciente: serpa, Servicecita:serci*/
 fecha!: Date;
 hora!: string;
 motivo!: string;
-med!:Medico;
+med : Medico= new Medico;
 Medicos!:Medico[];
 cargo!:string;
+
+medicoSelccionado !: Medico;
 
 
 
@@ -38,12 +50,13 @@ cargo!:string;
 solicitar_cita_paciente() {
   console.log("Médico seleccionado:", this.med); // 👈 Agregá esto
 
-  if (!this.med || !this.med.idMedico) {
+
+  if (!this.med || !this.med.idmedico) {
     alert("Por favor seleccione un médico antes de confirmar.");
     return;
   }
 
-  this.Servicecita.agendar_cita(this.fecha, this.hora, this.motivo, this.med.idMedico).subscribe(dato => {
+  this.Servicecita.agendar_cita(this.fecha, this.hora, this.motivo, this.med.idmedico).subscribe(dato => {
     if (dato) {
       alert("Cita Agendada");
       window.location.reload();
@@ -58,7 +71,26 @@ medico_encontrado() {
     this.Medicos = dato;
     console.log("Médicos disponibles:", this.Medicos);
   });
+
+  
+  
 }
+
+/*
+medicoSelect(id:number){
+
+  var filtro = this.Medicos.find(buscado => buscado.idMedico === id)
+
+if (filtro){
+
+  this.medicoSelccionado= filtro;
+
+  console.log("medico seleccionado")
+
+}
+
+  
+}*/
 
 }
 

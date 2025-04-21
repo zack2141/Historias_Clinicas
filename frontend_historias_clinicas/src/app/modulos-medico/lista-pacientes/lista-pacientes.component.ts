@@ -74,7 +74,7 @@ export class ListaPacientesComponent implements OnInit{
 
   redireccion_historia(cita: Cita): void {
     this.router.navigate(['/historia-clinica'], {
-      queryParams: { idCita: cita.idCita }
+      queryParams: { idCita: cita.idcita }
     });
   }
 }

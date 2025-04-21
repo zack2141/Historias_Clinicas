@@ -2,7 +2,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background-color: #f9fafb;
+   
   }
   
   /* Navbar */
@@ -40,8 +40,8 @@ body {
   
   /* Sección próximas citas */
   .citas-proximas {
-    flex: 2;
     margin-right: 2rem;
+    width: 60%;
   }
   
   .citas-proximas h2 {
@@ -110,6 +110,18 @@ body {
   
   .btn-historial:hover {
     background-color: #2563eb;
+  }
+
+  .boton-contenedor{
+    width: 100%;
+    height: 30vh;
+    background-color: white;
+    padding: 10%;
+  }
+
+  .contenido{
+
+    padding: 5%;
   }
   
 

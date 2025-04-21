@@ -49,10 +49,10 @@
   
              
             <td>
-              <select [(ngModel)]="med">
+              <select [(ngModel)]="med" >
                 <option value="" disabled selected>Seleccione un médico</option>
-                <option *ngFor="let m of Medicos" [ngValue]="m">
-                    {{ m.nombreMedico }} {{ m.apellidosMedico }}
+                <option *ngFor="let m of Medicos" [ngValue]="m" >
+                    {{ m.nombreMedico }} {{ m.apellidosMedico }} 
                 </option>
               </select>
             </td>
