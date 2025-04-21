@@ -46,7 +46,7 @@ export class ActualizarPacienteComponent implements OnInit {
   }
 
   actualizarPaciente(): void {
-    this.serpa.actualizar_Paciente(this.paciente.idPaciente).subscribe(res => {
+    this.serpa.actualizar_Paciente(this.paciente).subscribe(res => {
       if (res === true) {
         Swal.fire('Éxito', 'Paciente actualizado con éxito', 'success');
         this.router.navigate(['/ver-citas']);
