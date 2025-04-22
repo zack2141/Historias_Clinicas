@@ -157,13 +157,10 @@ public class Cita_Controlador {
 	@GetMapping("/ListaPacientesPorFecha")
 	public List<cita> verListaPacientes(
 	    
-	        @RequestParam("fecha1") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha) {
+	        @RequestParam("fecha1") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha) {
 
 	 
         medico medi = this.conLoMe.medic.getIDmedico();
-	    if (medi ==null) {
-	        return new ArrayList<>(); // Retorna lista vacía si el médico no existe
-	    }
 
 	   
 

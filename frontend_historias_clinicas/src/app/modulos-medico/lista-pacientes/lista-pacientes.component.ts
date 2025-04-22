@@ -90,7 +90,7 @@ export class ListaPacientesComponent implements OnInit{
       allowOutsideClick: false
     });
 
-    this.servicioCitas.pacientes_Cita_Medico(fechaFormateada).subscribe(
+    this.servicioCitas.pacientes_Cita_Medico(this.fechaSeleccionada).subscribe(
       (data: Cita[]) => {
         Swal.close();
         this.lista_citas = data;
