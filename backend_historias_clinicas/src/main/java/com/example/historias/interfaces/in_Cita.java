@@ -26,4 +26,5 @@ public interface in_Cita extends JpaRepository<cita, Long> {
     List<cita> citasDelDia2();
     
 
+    public cita findByIDpacienteAndFechaAndEstado(paciente paci, Date fecha, String estado);
 }

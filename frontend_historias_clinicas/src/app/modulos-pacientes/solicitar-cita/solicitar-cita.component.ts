@@ -106,6 +106,20 @@ medico_encontrado() {
   
 }
 
+cita_repetida(){
+  this.Servicecita.citas_repetidas(this.fecha).subscribe(dato=>{
+
+    if(dato === true){
+      Swal.fire({
+        icon: 'warning',
+        title: 'señor usuario, ya tiene citas agendadas para la fecha, por favor escoja otra fecha',
+        showConfirmButton: true
+      })
+    }
+
+  })
+}
+
 /*
 medicoSelect(id:number){
 

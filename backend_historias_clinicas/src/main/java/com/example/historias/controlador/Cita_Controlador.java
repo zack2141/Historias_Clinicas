@@ -91,7 +91,6 @@ public class Cita_Controlador {
 	    @RequestBody cita solicitud
 	) {
 		
-		
 		this.repCi.save(solicitud);
 	    
 		return true;
@@ -218,6 +217,21 @@ public class Cita_Controlador {
 	        .collect(Collectors.toList());
 	}
 	
+	// cita repetida
+	
+	@GetMapping("/citarepetida")
+	public boolean citarepedita (
+			@RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha ) {
+		
+		cita dato = this.repCi.findByIDpacienteAndFechaAndEstado(this.conLoPa.usu.getIDpaciente(), fecha,"Asignada");
+		
+		if(dato != null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 	
 
 	}

@@ -95,4 +95,9 @@ export class CitaService {
         `&IDpaciente=${idPaciente}`)
     }
 
+    citas_repetidas(fecha:Date):Observable<any>{
+      return this.httpClient.get(`${this.bdURL}/citarepetida?Fecha=${fecha}`)
+
+    }
+
 }
