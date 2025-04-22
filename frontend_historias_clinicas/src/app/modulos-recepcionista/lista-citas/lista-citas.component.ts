@@ -18,15 +18,15 @@ import { LogueosService } from '../../servicios/logueos.service';
 export class ListaCitasComponent implements OnInit{
 
   lista_citas: Cita[] = [];
-  fechaSeleccionada: string = '';
-  idPaciente!: String;
+  fechaSeleccionada!: String;
+  idPaciente!: number;
   
   citaselect: Cita = {
       idcita: 0,
       hora: '',
       fecha: new Date(),
-      motivo: '',
       motivoCita: '',
+      idrecepcionista:null,
       idmedico: {
         idmedico: 0,
         residenciaMedico: '',
@@ -59,7 +59,7 @@ export class ListaCitasComponent implements OnInit{
   ngOnInit(): void {
     this.lista_dia()
 
-    
+    this.sesionComoRecep()
   }
 
     constructor(
@@ -73,9 +73,22 @@ export class ListaCitasComponent implements OnInit{
       this.servicioCitas.citas_del_Dia().subscribe(dato =>{
         this.lista_citas= dato
       })
+
+      console.log(this.lista_citas)
     }
 
     buscarPaciente(){
+      this.servicioCitas.citas_Paciente(this.fechaSeleccionada,this.idPaciente).subscribe(dato=>{
+
+        this.lista_citas = dato
+        if( this.lista_citas.length == 0){
+
+          Swal.fire('No se encontraron citas', 'por favor verifique que los datos sean correctos', 'error')
+
+        }
+        
+
+      })
     }
 
     registro_ingreso(idcita:number){
@@ -92,6 +105,11 @@ export class ListaCitasComponent implements OnInit{
 
       })
 
+    }
+
+    sesionComoRecep(){
+
+      this.logueoService.setTipoUsuario('recep');
     }
 
     

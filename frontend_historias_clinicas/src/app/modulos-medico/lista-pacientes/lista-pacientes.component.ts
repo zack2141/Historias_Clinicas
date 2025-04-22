@@ -24,8 +24,8 @@ export class ListaPacientesComponent implements OnInit{
     idcita: 0,
     hora: '',
     fecha: new Date(),
-    motivo: '',
     motivoCita: '',
+    idrecepcionista:null,
     idmedico: {
       idmedico: 0,
       residenciaMedico: '',

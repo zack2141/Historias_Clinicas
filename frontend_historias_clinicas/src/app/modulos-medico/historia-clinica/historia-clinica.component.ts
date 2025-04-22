@@ -26,7 +26,7 @@ export class HistoriaClinicaComponent implements OnInit {
     idcita: 0,
     hora: '',
     fecha: new Date(),
-    motivo: '',
+    idrecepcionista:null,
     motivoCita: '',
     idmedico: {
       idmedico: 0,

@@ -5,9 +5,9 @@ export class Cita {
 idcita!:number
 hora!:String
 fecha!:Date
-motivo!:String
 idmedico!:Medico
 idpaciente!:Paciente
 motivoCita !: String
+idrecepcionista!: null
 
 }

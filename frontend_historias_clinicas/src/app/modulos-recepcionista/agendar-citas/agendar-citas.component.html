@@ -2,8 +2,8 @@
     <h2>Agendar citas</h2>
   
     <div class="buscador">
-      <input type="text" placeholder="102208519" />
-      <button class="btn-rojo">Buscar paciente</button>
+      <input type="text" placeholder="102208519" [(ngModel)]="idpaciente" />
+      <button class="btn-rojo" (click)="paciente_encontrado()">Buscar paciente</button>
     </div>
 
     <!--<div class="busqueda-paciente">
@@ -49,12 +49,12 @@
     <div class="formulario-cita">
       <div class="campo">
         <label>Seleccione una fecha</label>
-        <input type="date" [(ngModel)]="fecha" (change)="medico_encontrado()" />
+        <input type="date" [(ngModel)]="fecha"  />
       </div>
   
       <div class="campo">
         <label>Ingrese una hora disponible</label>
-        <select [(ngModel)]="hora" (change)="medico_encontrado()">
+        <select [(ngModel)]="hora" >
           <option value="">Seleccione una hora</option>
           <option value="08:00">08:00</option>
           <option value="09:00">09:00</option>
@@ -79,7 +79,7 @@
         <label>Médico asignado</label>
         <select [(ngModel)]="med">
           <option value="" disabled selected>Seleccione un médico</option>
-          <option *ngFor="let m of medico" [ngValue]="m">{{ m.nombreMedico }} {{ m.apellidosMedico }}</option>
+          <option *ngFor="let m of Medicos" [ngValue]="m">{{ m.nombreMedico }} {{ m.apellidosMedico }}</option>
         </select>
       </div>
   

@@ -8,8 +8,8 @@
       <input type="date" [(ngModel)]="fechaSeleccionada"  />
     </div>
 
-    <input type="text" placeholder="Buscar por ID" />
-    <button class="btn-atender">Buscar Paciente</button>
+    <input type="text" placeholder="Buscar por ID"  [(ngModel)]="idPaciente"/>
+    <button class="btn-atender" (click)="buscarPaciente()">Buscar Paciente</button>
 
 
   </div>

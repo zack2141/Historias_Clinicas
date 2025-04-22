@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -84,40 +86,15 @@ public class Cita_Controlador {
 
 
 	
-	@GetMapping("/agendarCitaRecep")
+	@PostMapping("/agendarCitaRecep")
 	public boolean agendarCitaRecep(
-	    @RequestParam String motivo,
-	    @RequestParam("Fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
-	    @RequestParam String hora,
-	    @RequestParam medico IDMedico, 
-	    @RequestParam paciente IDPaciente
+	    @RequestBody cita solicitud
 	) {
-	    // Obtener al recepcionista logueado
-	    recepcionista recep = this.conLoRe.recepLogueado;
-
-	    if (recep == null) {
-	        return false; // no hay recepcionista logueado
-	    }
-
-
-
-	    // Buscar al médico y paciente por ID
-	    Optional<medico> medicoOptional = this.repME.findById(IDMedico.getIDMedico());
-	    Optional<paciente> pacienteOptional = this.repPA.findById(IDPaciente.getIDpaciente());
-
-	    // Validar que el médico y el paciente existen
-	    if (!medicoOptional.isPresent() || !pacienteOptional.isPresent()) {
-	        return false;
-	    }
-
-	    medico med = medicoOptional.get();
-	    paciente pac = pacienteOptional.get();
-
-	   
-	    cita nuevaCita = new cita(motivo, "Asignada", fecha, hora, pac, med, recep);
-	    this.repCi.save(nuevaCita);
-
-	    return true;
+		
+		
+		this.repCi.save(solicitud);
+	    
+		return true;
 	}
 	
 	@GetMapping("citasProximas")
@@ -229,7 +206,7 @@ public class Cita_Controlador {
 	
 	@GetMapping("/citasPaciente")
 	public List<cita> verCitaspaciente(
-	    @RequestParam("fecha1") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
+	    @RequestParam("fecha1") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
 	    @RequestParam Long IDpaciente
 	) {
 	    // Obtenemos todas las citas de esa fecha

@@ -5,6 +5,10 @@ import { Medico } from '../../entidades/medico';
 import { Paciente } from '../../entidades/paciente';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LogueosService } from '../../servicios/logueos.service';
+import Swal from 'sweetalert2';
+import { PacienteService } from '../../servicios/paciente.service';
+import { Cita } from '../../entidades/cita';
 
 @Component({
   selector: 'app-agendar-citas',
@@ -17,15 +21,20 @@ import { CommonModule } from '@angular/common';
 export class AgendarCitasComponent implements OnInit {
 
   ngOnInit(): void {
+
+    this.sesionComoRecep()
     
   }
 
   constructor(private ServiceCita:CitaService,
     private ServiceMedico:MedicoService,
+    private logueoService: LogueosService,
+    private serviciopaciente: PacienteService
+        
     
   ){}
 
-medico!:Medico[];
+Medicos!:Medico[];
 med: Medico= new Medico;
 paciente: Paciente = new Paciente;
 fecha!:Date;
@@ -33,40 +42,97 @@ hora!:string;
 motivo!:string;
 cargo!:string;
 
+idpaciente!:number
 
 
-solicitar_cita_paciente(){
-  this.ServiceCita.agendar_cita_recep(this.fecha, this.hora, this.motivo, this.med,this.paciente).subscribe(dato=>{
-    
-  })
-}
+solicitudCita: Cita = {
+  idcita: 0,
+  hora: '',
+  fecha: new Date(),
+  idmedico: this.med,
+  idpaciente: this.paciente,
+  motivoCita: '',
+  idrecepcionista: null
+};
 
-medico_encontrado() {
-  this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato => {
-    this.medico = dato;
-    console.log("Médicos disponibles:", this.medico);
-  });
-}
-/*
-identificacionBuscada: string = ""; // lo que escribe el usuario
 
-  buscarPaciente() {
-    if (this.identificacionBuscada.trim() === "") {
-      alert("Ingrese una identificación válida");
-      return;
+paciente_encontrado(){
+  this.serviciopaciente.ver_Paciente(this.idpaciente).subscribe(dato=>{
+
+    if(!dato){
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'El ID no se encuentra registrado en el sistema',
+        showConfirmButton: true
+      })
+
+    }else{
+      this.paciente=dato
     }
 
-    this.ServicePaciente.buscarPacientePorIdentificacion(this.identificacionBuscada).subscribe(
-      (resp: Paciente) => {
-        this.paciente = resp;
-      },
-      err => {
-        alert("Paciente no encontrado");
-        this.paciente = new Paciente();
-      }
-    );
-  }
+  })
+}
+medico_encontrado() {
+  this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato => {
+    this.Medicos = dato;
+    console.log("Médicos disponibles:", this.Medicos);
 
-  */
+    if(this.Medicos.length===0){
+      Swal.fire({
+        icon: 'warning',
+        title: 'no hay medicos disponibles',
+        showConfirmButton: true
+      })
+    }
+  });
+
+  
+  
+}
+
+sesionComoRecep(){
+
+  this.logueoService.setTipoUsuario('recep');
+}
+
+solicitar_cita_paciente(){
+
+  this.solicitudCita.idpaciente= this.paciente
+  this.solicitudCita.idmedico= this.med
+  this.solicitudCita.fecha= this.fecha
+  this.solicitudCita.motivoCita = this.motivo
+  this.solicitudCita.hora = this.hora
+
+  console.log(this.solicitudCita)
+
+  this.ServiceCita.agendar_cita_recep(this.solicitudCita).subscribe(dato=>{
+    if(dato === true){
+      Swal.fire({
+        icon: 'success',
+        title: 'Solicitud realizada con exito',
+        showConfirmButton: true
+      }).then(()=>{
+        window.location.reload()
+      })
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al procesar la solicitud',
+        showConfirmButton: true
+      })
+    }
+    
+  },error=>{
+    Swal.fire({
+      icon: 'error',
+      title: 'Error del servidor',
+      showConfirmButton: true
+    })
+    console.warn(error)
+  })
+
+}
+
 }
 

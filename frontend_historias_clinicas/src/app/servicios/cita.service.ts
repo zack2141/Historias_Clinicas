@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Medico } from '../entidades/medico';
 import { Paciente } from '../entidades/paciente';
 import { formatDate } from '@angular/common';
+import { Cita } from '../entidades/cita';
 
 @Injectable({
   providedIn: 'root'
@@ -31,13 +32,8 @@ export class CitaService {
 
 
  agendar_cita_recep(
-      fecha:Date,
-      Hora:String,
-      Motivo:String,
-      med:Medico,
-      pac:Paciente):Observable<any>{
-        return this.httpClient.get(`${this.bdURL}/agendarCitaRecep?motivo=${Motivo}&`+`Fecha=${fecha}`+
-          `&hora=${Hora}`+`&medico=${med}`+`&paciente=${pac}`);
+      cita:Cita):Observable<any>{
+        return this.httpClient.post<boolean>(`${this.bdURL}/agendarCitaRecep`,cita);
         }
 
 
@@ -92,7 +88,7 @@ export class CitaService {
     }
 
     citas_Paciente(
-      fecha:Date,
+      fecha:String,
       idPaciente:number
     ):Observable<any>{
       return this.httpClient.get(`${this.bdURL}/citasPaciente?fecha1=${fecha}`+
