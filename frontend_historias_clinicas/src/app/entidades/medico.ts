@@ -9,7 +9,7 @@ export class Medico {
   cargoMedico !:String
   turnomedico !:String
   apellidosMedico !:String
-  nombresMedico !:String
+  nombreMedico !:String
   edadMedico !:String
 
 

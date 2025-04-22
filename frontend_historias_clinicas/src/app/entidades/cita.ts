@@ -5,6 +5,7 @@ export class Cita {
 idCita!:number
 hora!:String
 fecha!:Date
+motivo!:String
 idMedico!:Medico
 idPaciente!:Paciente
 motivoCita !: string
