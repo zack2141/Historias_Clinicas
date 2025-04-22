@@ -20,10 +20,6 @@ export class PacienteService {
     return this.http.post<boolean>(`${this.UrlPaciente}/registrar`, nuevo, { params });
   }
 
- /* buscarPacientePorIdentificacion(identificacion: string): Observable<Paciente> {
-    return this.http.get<Paciente>(`${this.UrlPaciente}/pacientes/${identificacion}`);
-  }*/
-
 
   ver_Paciente(id: number): Observable<Paciente> {
     return this.http.get<Paciente>(`${this.UrlPaciente}/ObtenerPaciente?id=${id}`);
@@ -32,4 +28,5 @@ export class PacienteService {
   actualizar_Paciente(paciente: Paciente): Observable<boolean> {
     return this.http.post<boolean>(`${this.UrlPaciente}/ActualizarPaciente`, paciente);
   }
+
 }
