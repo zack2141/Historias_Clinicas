@@ -58,18 +58,39 @@ export class VerCitasComponent implements OnInit {
   }
 
   cancelar_cita(idcita: number): void {
-    this.Servicecita.cancelar_Cita(idcita).subscribe(() => {
 
-      Swal.fire({
-                  icon: 'success',
-                  title: 'La cita ha sido cancelada',
-                  showConfirmButton: false,
-                  timer: 3000
-                }).then(() => { 
-                  this.citas_proximas(); // refrescar citas
-                }); 
-     
-    });
+
+    Swal.fire({
+      title: "¿Esta seguro de eleiminar la cita?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Acepto",
+      denyButtonText: `Cancelar`,
+      allowOutsideClick:false,
+      allowEscapeKey:false,
+      icon: "warning"
+    }).then((result) => {
+
+      if(result.isConfirmed){
+
+        this.Servicecita.cancelar_Cita(idcita).subscribe(() => {
+
+      
+          Swal.fire({
+                      icon: 'success',
+                      title: 'La cita ha sido cancelada',
+                      showConfirmButton: false,
+                      timer: 3000
+                    }).then(() => { 
+                      this.citas_proximas(); // refrescar citas
+                    }); 
+         
+        });
+
+      }
+
+    })
+    
   }
 
   ocultar_tabla_citas_proximas(): void {
