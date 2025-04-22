@@ -1,5 +1,5 @@
 .container {
-    max-width: 1000px;
+    min-width: 1000px;
     margin: 50px auto;
     padding: 30px;
     background-color: #fff;
@@ -17,51 +17,14 @@
   }
   
   form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
     width: 100%;
+    grid-template-columns: repeat(auto, 1fr);
   }
   
-  .form-group {
-    flex: 1 1 calc(50% - 20px);
-    display: flex;
-    flex-direction: column;
-  }
   
-  .form-group label {
-    font-weight: 500;
-    margin-bottom: 6px;
-    color: #444;
-  }
   
-  .form-group input,
-  .form-group select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    transition: border 0.2s;
-    color: #333;
-  }
-  
-  .form-group input::placeholder,
-  .form-group select::placeholder {
-    color: #aaa;
-    font-style: italic;
-  }
-  
-  .form-group input:focus,
-  .form-group select:focus {
-    border-color: #888;
-    outline: none;
-  }
+ 
   
 
   button {
@@ -93,3 +56,33 @@
     }
   }
   
+  /* columnas del formulario*/
+
+  .columna1{
+    grid-column: 1;
+  }
+
+  .columna2{
+    grid-column: 2;
+  }
+
+  .columna3{
+    grid-column: 3;
+  }
+
+  .botones{
+    grid-column: 2;
+    margin-top: 20%;
+
+  }
+
+
+  /* para los inputs */
+
+  .form-group{
+    margin:10% 20% 0% 20%;
+  }
+
+  label{
+    font-size: 1.2rem;
+  }
