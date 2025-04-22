@@ -25,33 +25,29 @@ public class conPaciente {
 
 	    @Autowired
 	    private in_Loguin_Paciente repLoPa;
+	    
+	    @Autowired
+		private LoguinPaciente conLoPa;// para acceder a los metodos del controlador de LoguinPaciente//
 
 
 	    @PostMapping("/registrar")
 	    public boolean registrarPacienteConLogin(
-	    		@RequestBody paciente nuevoPaciente, 
-	            @RequestParam String usuario, 
-	            @RequestParam String password) {
-	    	
-	        // Validar campos obligatorios
-	        if (nuevoPaciente.getCorreo() == null || nuevoPaciente.getNombres() == null ||
-	            nuevoPaciente.getApellidos() == null || usuario == null || password == null) {
-	            return false;
-	        }                             
+	    		@RequestBody loguin_Paciente nuevoPaciente) {
+	                         
 
 	        // Verificar si el correo o el usuario ya existen
-	        if (repPa.findByCorreo(nuevoPaciente.getCorreo()) != null || 
-	            repLoPa.findByUsuarioPaciente(usuario) != null) {
+	        if (repPa.findByCorreo(nuevoPaciente.getIDpaciente().getCorreo()) != null || 
+	            repLoPa.findByUsuarioPaciente(nuevoPaciente.getUsuarioPaciente()) != null) {
 	            return false;
 	        }
 	        
-	        nuevoPaciente.setRolPaciente("Paciente");
+	        nuevoPaciente.getIDpaciente().setRolPaciente("Paciente");
 
 	        // Guardar paciente
-	        paciente pacienteGuardado = repPa.save(nuevoPaciente);
+	        paciente pacienteGuardado = repPa.save(nuevoPaciente.getIDpaciente());
 
 	        // Crear login y guardar
-	        loguin_Paciente login = new loguin_Paciente(usuario, password, pacienteGuardado);
+	        loguin_Paciente login = new loguin_Paciente(nuevoPaciente.getUsuarioPaciente(),nuevoPaciente.getPassword() , pacienteGuardado);
 	        repLoPa.save(login);
 
 	        return true;
@@ -59,29 +55,13 @@ public class conPaciente {
 
 	    @PostMapping("/ActualizarPaciente")
 	    public boolean actualizaPaciente(
-	            @RequestBody paciente act,
-	            @RequestParam String usuario,
-	            @RequestParam String password) {
-
-	        if (!repPa.existsById(act.getIDpaciente())) {
-	            return false;
-	        }
-
-	        paciente otroPaciente = repPa.findByCorreo(act.getCorreo());
-	        if (otroPaciente != null && !otroPaciente.getIDpaciente().equals(act.getIDpaciente())) {
-	            return false;
-	        }
-
-	        // Actualiza paciente
-	        repPa.save(act);
-
-	        // Actualiza login del paciente
-	        loguin_Paciente log = repLoPa.findById(String.valueOf(act.getIDpaciente())).orElse(null);
-	        if (log != null) {
-	            log.setUsuarioPaciente(usuario);
-	            log.setPassword(password);
-	            repLoPa.save(log);
-	        }
+	            @RequestBody loguin_Paciente act) {
+	    	
+	    	this.repPa.save(act.getIDpaciente());
+	    	
+	    	this.repLoPa.save(act);
+	    	
+	    	this.conLoPa.usu = act;
 
 	        return true;
 	    }

@@ -18,6 +18,7 @@ import com.example.historias.interfaces.In_Medico;
 import com.example.historias.interfaces.in_Cita;
 import com.example.historias.interfaces.in_Paciente;
 import com.example.historias.modelo.cita;
+import com.example.historias.modelo.loguin_Paciente;
 import com.example.historias.modelo.medico;
 import com.example.historias.modelo.paciente;
 import com.example.historias.modelo.recepcionista;
@@ -64,9 +65,9 @@ public class Cita_Controlador {
 	        @RequestParam String motivo,
 	        @RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
 	        @RequestParam String hora,
-	        @RequestParam("medico") Long idMedico) {
+	        @RequestParam ("medico")Long idMedico) {
 
-	    paciente paci = this.conLoPa.usu;
+		loguin_Paciente paci = this.conLoPa.usu;
 
 	    Optional<medico> medicoOptional = this.repME.findById(idMedico);
 	    if (!medicoOptional.isPresent()) {
@@ -75,7 +76,7 @@ public class Cita_Controlador {
 
 	    medico med = medicoOptional.get();
 
-	    cita nuevaCita = new cita(motivo, "Asignada", fecha, hora, paci, med, null);
+	    cita nuevaCita = new cita(motivo, "Asignada", fecha, hora, paci.getIDpaciente(), med, null);
 	    this.repCi.save(nuevaCita);
 
 	    return true;
@@ -122,7 +123,7 @@ public class Cita_Controlador {
 	@GetMapping("citasProximas")
 	public List<cita>citasProximas(){
 		
-		paciente paci = this.conLoPa.usu;
+		paciente paci = this.conLoPa.usu.getIDpaciente();
 		
 	
 		
@@ -133,13 +134,13 @@ public class Cita_Controlador {
 	@GetMapping("citasSolicitadas")
 	public List<cita>citasSolicitadas(){
 		
-		paciente paci = this.conLoPa.usu;
+		paciente paci = this.conLoPa.usu.getIDpaciente();
 		
 		return this.repCi.findByIDpacienteAndEstado(paci,"Atendida");
 		
 		}
 	
-	@GetMapping("cancelarCita")
+	@GetMapping("/cancelarCita")
 	public boolean cancelarCita(
 			@RequestParam Long id) {
 		
@@ -156,13 +157,10 @@ public class Cita_Controlador {
 	@GetMapping("/ListaPacientesPorFecha")
 	public List<cita> verListaPacientes(
 	    
-	        @RequestParam("fecha1") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha) {
+	        @RequestParam("fecha1") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha) {
 
 	 
-        medico medi = this.conLoMe.medic;
-	    if (medi ==null) {
-	        return new ArrayList<>(); // Retorna lista vacía si el médico no existe
-	    }
+        medico medi = this.conLoMe.medic.getIDmedico();
 
 	   
 

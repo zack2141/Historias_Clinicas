@@ -36,8 +36,9 @@
 
   form {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
     gap: 16px;
+    grid-auto-rows: minmax(100px, auto);
   }
   
 
@@ -81,4 +82,73 @@
   button[type="submit"]:hover {
     background-color: #a93226;
   }
+
+  table, tr, td{
+    border: solid 1px black;
+  }
+
+  table{
+    width: 100%;
+    margin-bottom: 5vh;
+  }
+
+/* Contenedores del formulario*/
+
+#cont1{
+  grid-column: 1;
+  grid-row: 1;
+
+}
+
+#cont2{
+
+  grid-column: 2;
+  grid-row: 1;
+  
+}
+
+#cont3{
+
+  grid-column: 3;
+  grid-row: 1;
+  
+}
+
+#cont4{
+
+  grid-column: 1;
+  grid-row: 2;
+  
+}
+
+#cont5{
+
+  grid-column: 2;
+  grid-row: 2;
+  
+}
+
+#cont6{
+
+  grid-column: 3;
+  grid-row: 2;
+  
+}
+
+#cont7{
+
+  grid-column: 1;
+  grid-row: 3;
+  
+}
+
+#cont8{
+
+  grid-column: 1/5;
+  grid-row: 4;
+  text-align: center;
+  
+}
+
+
   

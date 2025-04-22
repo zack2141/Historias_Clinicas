@@ -1,56 +1,78 @@
 <div class="contenedor-historia">
     <h4>Historial médico</h4>
   
-    <div class="datos-paciente">
-      <table>
-        <tr>
-          <td><strong>Identificación</strong></td>
-          <td>{{ paciente.identificacion }}</td>
+    <div class="datos-cita">
+      <table >
+
+        <thead>
           <td><strong>Nombres</strong></td>
-          <td>{{ paciente.nombres }}</td>
           <td><strong>Apellidos</strong></td>
-          <td>{{ paciente.apellidos }}</td>
-        </tr>
-        <tr>
           <td><strong>Fecha de nacimiento</strong></td>
-          <td>{{ paciente.fechaNacimiento }}</td>
           <td><strong>Sexo</strong></td>
-          <td>{{ paciente.sexo }}</td>
           <td><strong>Estado Civil</strong></td>
-          <td>{{ paciente.estadoCivil }}</td>
-        </tr>
-        <tr>
           <td><strong>Afiliación</strong></td>
-          <td>{{ paciente.afiliacion }}</td>
           <td><strong>RH</strong></td>
-          <td>{{ paciente.rh }}</td>
-        </tr>
+        </thead>
+        <tbody>
+
+          <tr >
+          
+            <td>{{ cita.idpaciente.nombres }}</td>
+            <td>{{ cita.idpaciente.apellidos }}</td>
+            <td>{{ cita.idpaciente.fechaNacimiento | date: 'dd-MM-yyyy' }}</td>
+            <td>{{ cita.idpaciente.sexo }}</td>
+            <td>{{ cita.idpaciente.estadoCivil }}</td>
+            <td>{{ cita.idpaciente.afiliacion }}</td>
+            <td>{{ cita.idpaciente.rh }}</td>
+          </tr>
+
+        </tbody>
       </table>
     </div>
   
     <form (ngSubmit)="Guardar_historial()">
-      <label>Motivo de la consulta</label>
-      <input [(ngModel)]="nueva_historia.motivo" name="motivoConsulta"/>
+
+      <div id="cont1">
+        <label>Motivo de la consulta</label>
+        <input [(ngModel)]="nueva_historia.motivoCita" name="motivoConsulta"/>
+      </div>
+      
+      <div id="cont2">
+        <label>Enfermedades actuales del cita</label>
+        <input [(ngModel)]="nueva_historia.enfermedadPaciente" name="enfermedadesActuales"/>
+    
+      </div>
+     
+      <div id="cont3">
+        <label>Diagnóstico</label>
+        <input [(ngModel)]="nueva_historia.diagnosticos" name="diagnostico"/>
   
-      <label>Enfermedades actuales del paciente</label>
-      <input [(ngModel)]="nueva_historia.enfermedadPaciente" name="enfermedadesActuales"/>
-  
-      <label>Diagnóstico</label>
-      <input [(ngModel)]="nueva_historia.diagnostico" name="diagnostico"/>
-  
-      <label>Observaciones</label>
-      <textarea [(ngModel)]="nueva_historia.observaciones" name="observaciones"></textarea>
-  
-      <label>Exámenes complementarios</label>
-      <input [(ngModel)]="nueva_historia.examenesComplementarios" name="examenes"/>
-  
-      <label>Medicamentos</label>
-      <input [(ngModel)]="nueva_historia.recetaMedicamentos" name="medicamentos"/>
-  
-      <label>Tratamientos</label>
-      <textarea [(ngModel)]="nueva_historia.tratamientos" name="tratamientos"></textarea>
-  
-      <button type="submit">Registrar</button>
+      </div>
+      
+      <div id="cont4">
+        <label>Observaciones</label>
+        <textarea [(ngModel)]="nueva_historia.observaciones" name="observaciones"></textarea>
+      </div>
+      
+      <div id="cont5">
+        <label>Exámenes complementarios</label>
+        <input [(ngModel)]="nueva_historia.examenesComplementario" name="examenes"/>
+    </div>
+      
+      <div id="cont6">
+        <label>Medicamentos</label>
+        <input [(ngModel)]="nueva_historia.recetaMedicamentos" name="medicamentos"/>
+      </div>
+      
+      <div id="cont7">
+        <label>Tratamientos</label>
+        <textarea [(ngModel)]="nueva_historia.tratamientos" name="tratamientos"></textarea>
+      </div>
+      
+      <div id="cont8">
+        <button type="submit">Registrar</button>
+      </div>
+      
     </form>
   </div>
   

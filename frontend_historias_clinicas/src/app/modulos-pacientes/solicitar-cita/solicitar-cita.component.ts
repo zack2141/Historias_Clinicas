@@ -5,6 +5,8 @@ import { Medico } from '../../entidades/medico';
 import {Cita} from '../../entidades/cita';
 import { CommonModule } from '@angular/common';
 import { MedicoService } from '../../servicios/medico.service';
+import { LogueosService } from '../../servicios/logueos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-solicitar-cita',
@@ -15,20 +17,31 @@ import { MedicoService } from '../../servicios/medico.service';
 })
 export class SolicitarCitaComponent implements OnInit{
 
-ngOnInit(): void{
 
-}
 
 constructor(private Servicecita:CitaService,
-  private ServiceMedico:MedicoService
+  private ServiceMedico:MedicoService,
+  private logueoService: LogueosService
 ){}
+
+ngOnInit(): void{
+
+  this.SesionComoPaciente()
+}
+
+// funcion que muestra la barra de navegacion como paciente
+SesionComoPaciente() {
+  this.logueoService.setTipoUsuario('paciente');
+}
 /*ServicePaciente: serpa, Servicecita:serci*/
 fecha!: Date;
 hora!: string;
 motivo!: string;
-med!:Medico;
+med : Medico= new Medico;
 Medicos!:Medico[];
 cargo!:string;
+
+medicoSelccionado !: Medico;
 
 
 
@@ -38,17 +51,39 @@ cargo!:string;
 solicitar_cita_paciente() {
   console.log("Médico seleccionado:", this.med); // 👈 Agregá esto
 
-  if (!this.med || !this.med.idMedico) {
-    alert("Por favor seleccione un médico antes de confirmar.");
+
+  if (!this.med || !this.med.idmedico) {
+    
+    Swal.fire({
+                      icon: 'warning',
+                      title: 'por favor, seleccione un medico antes de agendar la cita',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+
+    
+
     return;
   }
 
-  this.Servicecita.agendar_cita(this.fecha, this.hora, this.motivo, this.med.idMedico).subscribe(dato => {
+  this.Servicecita.agendar_cita(this.fecha, this.hora, this.motivo, this.med.idmedico).subscribe(dato => {
     if (dato) {
-      alert("Cita Agendada");
-      window.location.reload();
+      Swal.fire({
+        icon: 'success',
+        title: 'La cita ha sido agendada ',
+        showConfirmButton: true
+      }).then(() => { 
+        window.location.reload();; // refrescar citas
+      }); 
+      
     } else {
-      alert("La solicitud ha fallado");
+      Swal.fire({
+        icon: 'success',
+        title: 'fallo en la solicitud ',
+        showConfirmButton: true
+      }).then(() => { 
+        window.location.reload();; // refrescar citas
+      }); 
     }
   });
 }
@@ -57,8 +92,35 @@ medico_encontrado() {
   this.ServiceMedico.listaMedicosDisponibles(this.fecha, this.hora, this.cargo).subscribe(dato => {
     this.Medicos = dato;
     console.log("Médicos disponibles:", this.Medicos);
+
+    if(this.Medicos.length===0){
+      Swal.fire({
+        icon: 'warning',
+        title: 'no hay medicos disponibles',
+        showConfirmButton: true
+      })
+    }
   });
+
+  
+  
 }
+
+/*
+medicoSelect(id:number){
+
+  var filtro = this.Medicos.find(buscado => buscado.idMedico === id)
+
+if (filtro){
+
+  this.medicoSelccionado= filtro;
+
+  console.log("medico seleccionado")
+
+}
+
+  
+}*/
 
 }
 

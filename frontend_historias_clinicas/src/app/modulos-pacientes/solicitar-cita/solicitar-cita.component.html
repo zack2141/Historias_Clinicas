@@ -18,12 +18,12 @@
           <tr>
             
             <td>
-              <input type="date" [(ngModel)]="fecha" (change)="medico_encontrado()" />
+              <input type="date" [(ngModel)]="fecha"  />
             </td>
   
             
             <td>
-              <select [(ngModel)]="hora" (change)="medico_encontrado()">
+              <select [(ngModel)]="hora">
                 <option value="" disabled selected>Seleccione una hora</option>
                 <option value="08:00">08:00 AM</option>
                 <option value="09:00">09:00 AM</option>
@@ -49,10 +49,10 @@
   
              
             <td>
-              <select [(ngModel)]="med">
+              <select [(ngModel)]="med" >
                 <option value="" disabled selected>Seleccione un médico</option>
-                <option *ngFor="let m of Medicos" [ngValue]="m">
-                    {{ m.nombreMedico }} {{ m.apellidosMedico }}
+                <option *ngFor="let m of Medicos" [ngValue]="m" >
+                    {{ m.nombreMedico }} {{ m.apellidosMedico }} 
                 </option>
               </select>
             </td>

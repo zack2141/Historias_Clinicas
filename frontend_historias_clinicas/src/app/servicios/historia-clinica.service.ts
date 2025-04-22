@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -11,8 +11,10 @@ export class HistoriaClinicaService {
 
   constructor(private http: HttpClient) { }
 
-  registrarHistorial(historial: any): Observable<any> {
-    return this.http.post(`${this.UrlBase}/guardarHistorialClinico`, historial, { responseType: 'text' });
+  registrarHistorial(historial: any, cita: number): Observable<any> {
+    const params= new HttpParams()
+    .set('idcita', cita)
+    return this.http.post(`${this.UrlBase}/guardarHistorialClinico`, historial, { responseType: 'text', params });
   }
 
   verHistoriales(): Observable<any[]> {

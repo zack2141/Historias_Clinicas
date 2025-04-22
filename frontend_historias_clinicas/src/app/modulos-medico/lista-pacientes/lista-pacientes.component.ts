@@ -19,6 +19,41 @@ export class ListaPacientesComponent implements OnInit{
   lista_citas: Cita[] = [];
   fechaSeleccionada: string = '';
 
+  citaselect: Cita = {
+    idcita: 0,
+    hora: '',
+    fecha: new Date(),
+    motivo: '',
+    motivoCita: '',
+    idmedico: {
+      idmedico: 0,
+      residenciaMedico: '',
+      telefonoMedico: '',
+      direccionMedico: '',
+      salarioMedcio: 0,
+      correoMedico: '',
+      cargoMedico: '',
+      turnomedico: '',
+      apellidosMedico: '',
+      nombreMedico: '',
+      edadMedico: ''
+    },
+    idpaciente: {
+      idPaciente: '',
+      nombres: '',
+      apellidos: '',
+      sexo: '',
+      estadoCivil: '',
+      fechaNacimiento: new Date(),
+      rolPaciente: '',
+      direccion: '',
+      rh: '',
+      correo: '',
+      telefono: '',
+      afiliacion: ''
+    }
+  };
+
   constructor(
     private servicioCitas: CitaService,
     private router: Router
@@ -27,8 +62,10 @@ export class ListaPacientesComponent implements OnInit{
   ngOnInit(): void {
     const hoy = new Date();
     this.fechaSeleccionada = hoy.toISOString().split('T')[0];
-    this.ver_lista_pacientes();
+    this.lista_dia()
   }
+
+ 
 
   ver_lista_pacientes(): void {
     if (!this.fechaSeleccionada) {
@@ -53,7 +90,7 @@ export class ListaPacientesComponent implements OnInit{
       allowOutsideClick: false
     });
 
-    this.servicioCitas.pacientes_Cita_Medico(fechaFormateada).subscribe(
+    this.servicioCitas.pacientes_Cita_Medico(this.fechaSeleccionada).subscribe(
       (data: Cita[]) => {
         Swal.close();
         this.lista_citas = data;
@@ -73,8 +110,21 @@ export class ListaPacientesComponent implements OnInit{
   }
 
   redireccion_historia(cita: Cita): void {
+
+    this.citaselect = cita;
+
+    console.log(this.citaselect)
+
     this.router.navigate(['/historia-clinica'], {
-      queryParams: { idCita: cita.idCita }
+      state: { cita: this.citaselect }
     });
   }
+
+  lista_dia(){
+
+    this.servicioCitas.citas_del_Dia().subscribe(dato =>{
+      this.lista_citas= dato
+    })
+  }
+
 }

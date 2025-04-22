@@ -4,12 +4,16 @@ import { HistoriaClinicaService } from '../../servicios/historia-clinica.service
 import { Router } from '@angular/router';
 import { HistorialClinico } from '../../entidades/historial-clinico';
 import Swal from 'sweetalert2';
+import { Cita } from '../../entidades/cita';
+import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common'
+import { Paciente } from '../../entidades/paciente';
 
 
 @Component({
   selector: 'app-historia-clinica',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './historia-clinica.component.html',
   styleUrl: './historia-clinica.component.css'
 })
@@ -17,34 +21,80 @@ export class HistoriaClinicaComponent implements OnInit {
 
   
 
-  paciente: any = {}; 
-  nueva_historia: HistorialClinico = new HistorialClinico();
+  cita: Cita = {
+    idcita: 0,
+    hora: '',
+    fecha: new Date(),
+    motivo: '',
+    motivoCita: '',
+    idmedico: {
+      idmedico: 0,
+      residenciaMedico: '',
+      telefonoMedico: '',
+      direccionMedico: '',
+      salarioMedcio: 0,
+      correoMedico: '',
+      cargoMedico: '',
+      turnomedico: '',
+      apellidosMedico: '',
+      nombreMedico: '',
+      edadMedico: ''
+    },
+    idpaciente: {
+      idPaciente: '',
+      nombres: '',
+      apellidos: '',
+      sexo: '',
+      estadoCivil: '',
+      fechaNacimiento: new Date(),
+      rolPaciente: '',
+      direccion: '',
+      rh: '',
+      correo: '',
+      telefono: '',
+      afiliacion: ''
+    }
+  };
+
+  nueva_historia: HistorialClinico ={
+    recetaMedicamentos: '',
+    motivoCita: '',
+    enfermedadPaciente: '',
+    observaciones: '',
+    examenesComplementario: '',
+    diagnosticos: '',
+    idmedico: null,
+    idpaciente : null,
+    idHistorial: 0,
+    tratamientos: ""
+  }
 
   constructor(
     private ServiceHistorial: HistoriaClinicaService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
-    const navigation = this.router.getCurrentNavigation();
-    const datosPaciente = navigation?.extras?.state?.['paciente'];
-    if (datosPaciente) {
-      this.paciente = datosPaciente;
+    const state = this.location.getState() as { cita?: Cita }; // para obtener la cita desde el anterior modulo cuando se utiliza router navigation
+
+    if (state && state.cita) {
+      this.cita = state.cita;
+
+      this.nueva_historia.idpaciente = this.cita.idpaciente
+      console.log("✅ Cita recibida:", this.cita);
+    } else {
+      console.warn("⚠️ No se recibió la cita.");
     }
   }
   
   Guardar_historial(): void {
-    if (!this.nueva_historia.motivo || !this.nueva_historia.diagnostico) {
+    if ( !this.nueva_historia.diagnosticos) {
       Swal.fire('Campos incompletos', 'Por favor llena los campos requeridos.', 'warning');
       return;
     }
 
-   
-
-    const historiaCompleta = {
-      ...this.nueva_historia,
-      paciente: this.paciente
-    };
+  
 
     Swal.fire({
       title: 'Guardando historial...',
@@ -54,7 +104,7 @@ export class HistoriaClinicaComponent implements OnInit {
       allowOutsideClick: false
     });
 
-    this.ServiceHistorial.registrarHistorial(historiaCompleta).subscribe(
+    this.ServiceHistorial.registrarHistorial(this.nueva_historia, this.cita.idcita).subscribe(
       (respuesta) => {
         Swal.close();
         Swal.fire('Éxito', 'Historial registrado exitosamente.', 'success').then(() => {

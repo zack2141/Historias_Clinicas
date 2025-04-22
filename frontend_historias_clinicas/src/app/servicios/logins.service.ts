@@ -68,4 +68,10 @@ export class LoginsService {
       })
     );
   }
+
+  obtenerPaciente(): Observable<any>{
+
+    return this.http.get(`${this.urlLogin}/obtener`);
+  }
+
 }

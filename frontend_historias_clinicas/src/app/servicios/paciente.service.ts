@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Paciente } from '../entidades/paciente';
 import { Observable } from 'rxjs';
+import { LoguinPaciente } from '../entidades/loguin-paciente';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,10 @@ export class PacienteService {
 
   constructor(private http: HttpClient) { }
 
-  registrar_paciente(nuevo: Paciente, usuario: string, password: string): Observable<boolean> {
-    const params = new HttpParams()
-      .set('usuario', usuario)
-      .set('password', password);
+  registrar_paciente(paciente: LoguinPaciente): Observable<boolean> {
 
-    return this.http.post<boolean>(`${this.UrlPaciente}/registrar`, nuevo, { params });
+
+    return this.http.post<boolean>(`${this.UrlPaciente}/registrar`, paciente);
   }
 
 
@@ -25,7 +24,7 @@ export class PacienteService {
     return this.http.get<Paciente>(`${this.UrlPaciente}/ObtenerPaciente?id=${id}`);
   }
 
-  actualizar_Paciente(paciente: Paciente): Observable<boolean> {
+  actualizar_Paciente(paciente: LoguinPaciente): Observable<boolean> {
     return this.http.post<boolean>(`${this.UrlPaciente}/ActualizarPaciente`, paciente);
   }
 

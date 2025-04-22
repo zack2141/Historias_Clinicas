@@ -5,43 +5,28 @@
     
       <div class="form-group">
         <label>No. del Documento:</label>
-        <input type="text" [(ngModel)]="paciente.idPaciente" name="idPaciente" placeholder="Ingrese su No. de documento">
+        <input type="text" [(ngModel)]="paciente.usuarioPaciente" name="idPaciente" placeholder="Ingrese su No. de documento">
       </div>
 
       <div class="form-group">
         <label>Nombres:</label>
-        <input type="text" [(ngModel)]="paciente.nombres" name="nombres" placeholder="Ingrese su Nombre" required>
+        <input type="text" [(ngModel)]="paciente.idpaciente.nombres" name="nombres" placeholder="Ingrese su Nombre" required>
       </div>
 
       <div class="form-group">
         <label>Apellidos:</label>
-        <input type="text" [(ngModel)]="paciente.apellidos" name="apellidos" placeholder="Ingrese sus Apellidos" required>
-      </div>
-
-      <div class="form-group">
-        <label>Fecha de nacimiento:</label>
-        <input type="date" [(ngModel)]="paciente.fechaNacimiento" name="fechaNacimiento" placeholder="Ingrese su fecha de nacimiento">
-      </div>
-
-      <div class="form-group">
-        <label>Teléfono:</label>
-        <input type="text" [(ngModel)]="paciente.telefono" name="telefono" placeholder="Ingrese su No. de teléfono">
-      </div>
-
-      <div class="form-group">
-        <label>Correo:</label>
-        <input type="email" [(ngModel)]="paciente.correo" name="correo" placeholder="Ingrese su correo electrónico" required>
-      </div>
-
-      <div class="form-group">
-        <label>Dirección:</label>
-        <input type="text" [(ngModel)]="paciente.direccion" name="direccion" placeholder="Ingrese su dirección">
+        <input type="text" [(ngModel)]="paciente.idpaciente.apellidos" name="apellidos" placeholder="Ingrese sus Apellidos" required>
       </div>
 
       
       <div class="form-group">
+        <label>Afiliación:</label>
+        <input type="text" [(ngModel)]="paciente.idpaciente.afiliacion" name="afiliacion" placeholder="Ingrese su afiliación">
+      </div>
+
+      <div class="form-group">
         <label>Sexo:</label>
-        <select [(ngModel)]="paciente.sexo" name="sexo" placeholder="Ingrese su sexo" required>
+        <select [(ngModel)]="paciente.idpaciente.sexo" name="sexo" placeholder="Ingrese su sexo" required>
           <option value="">Seleccione su sexo</option>
           <option value="Masculino">Masculino</option>
           <option value="Femenino">Femenino</option>
@@ -49,31 +34,53 @@
         </select>
       </div>
 
+      
+
+      
+
+      
       <div class="form-group">
         <label>Estado civil:</label>
-        <input type="text" [(ngModel)]="paciente.estadoCivil" name="estadoCivil" placeholder="Ingrese su estado civil">
+        <input type="text" [(ngModel)]="paciente.idpaciente.estadoCivil" name="estadoCivil" placeholder="Ingrese su estado civil">
+      </div>
+      <div class="form-group">
+        <label>Teléfono:</label>
+        <input type="text" [(ngModel)]="paciente.idpaciente.telefono" name="telefono" placeholder="Ingrese su No. de teléfono">
+      </div>
+
+      
+
+      <div class="form-group">
+        <label>Correo:</label>
+        <input type="email" [(ngModel)]="paciente.idpaciente.correo" name="correo" placeholder="Ingrese su correo electrónico" required>
       </div>
 
       <div class="form-group">
-        <label>Afiliación:</label>
-        <input type="text" [(ngModel)]="paciente.afiliacion" name="afiliacion" placeholder="Ingrese su afiliación">
+        <label>Fecha de nacimiento:</label>
+        <input type="date" [(ngModel)]="paciente.idpaciente.fechaNacimiento" name="fechaNacimiento" placeholder="Ingrese su fecha de nacimiento">
       </div>
+      
+      <div class="form-group">
+        <label>Dirección:</label>
+        <input type="text" [(ngModel)]="paciente.idpaciente.direccion" name="direccion" placeholder="Ingrese su dirección">
+      </div>
+     
+
+     
+
+      
 
       <div class="form-group">
         <label>RH:</label>
-        <input type="text" [(ngModel)]="paciente.rh" name="rh" placeholder="Ingrese su tipo de sangre">
+        <input type="text" [(ngModel)]="paciente.idpaciente.rh" name="rh" placeholder="Ingrese su tipo de sangre">
       </div>
       
-      
-      <div class="form-group">
-        <label>Ingrese su usuario:</label>
-        <input type="text" [(ngModel)]="usuario" name="usuario" placeholder="Ingrese un usuario" required>
-      </div>
+    
 
       <div class="Password">
         <div class="form-group">
           <label>Contraseña:</label>
-          <input type="password" [(ngModel)]="password" name="password" placeholder="Ingrese una contraseña que sea segura" required>
+          <input type="password" [(ngModel)]="paciente.password" name="password" placeholder="Ingrese una contraseña que sea segura" required>
         </div>
         </div>
 

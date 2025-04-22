@@ -41,15 +41,19 @@ a{
     display: flex;
 }
 
-#menu-derecha{
+.menu-derecha{
 
     width: 20%;
     float: right;
-    display: none;
 }
 
 #prueba{
     width: 100%;
     height: 80vh;
     background-color: aqua;
+}
+
+#contenido-rotativo{
+    min-height: 80vh;
+    
 }

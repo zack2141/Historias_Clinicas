@@ -4,7 +4,7 @@
       <section class="citas-proximas" *ngIf="mostrarProximas">
         <h2>Próximas citas</h2>
   
-        <table *ngIf="citas.length > 0">
+        <table *ngIf="cantcitas > 0">
           <thead>
             <tr>
               <th>Fecha</th>
@@ -19,25 +19,25 @@
             <tr *ngFor="let cita of citas">
               <td>{{ cita.fecha | date: 'MM-dd-yyyy' }}</td>
               <td>{{ cita.hora }}</td>
-              <td>{{ cita.motivo }}</td>
-              <td>{{ cita.idMedico.cargoMedico }}</td>
-              <td>{{ cita.idMedico.nombreMedico }} {{ cita.idMedico.apellidosMedico }}</td>
+              <td>{{ cita.motivoCita }}</td>
+              <td>{{ cita.idmedico.cargoMedico }}</td>
+              <td>{{ cita.idmedico.nombreMedico }} {{ cita.idmedico.apellidosMedico }}</td>
               <td>
-                <button class="btn-cancelar" (click)="cancelar_cita(cita.idCita)">Cancelar cita</button>
+                <button class="btn-cancelar" (click)="cancelar_cita(cita.idcita)">Cancelar cita</button>
               </td>
             </tr>
           </tbody>
         </table>
   
-        <p *ngIf="citas.length === 0">No tienes citas próximas.</p>
+        <p *ngIf="cantcitas === 0">No tienes citas próximas.</p>
   
-        <button class="btn-historial" (click)="ocultar_tabla_citas_proximas()">Ver historial de citas</button>
+        
       </section>
   
       <section class="citas-anteriores" *ngIf="!mostrarProximas">
         <h2>Historial de citas</h2>
   
-        <table *ngIf="citasAnteriores.length > 0">
+        <table *ngIf="cantanteriores > 0">
           <thead>
             <tr>
               <th>Fecha</th>
@@ -51,17 +51,28 @@
             <tr *ngFor="let cita of citasAnteriores">
               <td>{{ cita.fecha | date: 'MM-dd-yyyy' }}</td>
               <td>{{ cita.hora }}</td>
-              <td>{{ cita.motivo }}</td>
-              <td>{{ cita.idMedico.cargoMedico }}</td>
-              <td>{{ cita.idMedico.nombreMedico }} {{ cita.idMedico.apellidosMedico }}</td>
+              <td>{{ cita.motivoCita }}</td>
+              <td>{{ cita.idmedico.cargoMedico }}</td>
+              <td>{{ cita.idmedico.nombreMedico }} {{ cita.idmedico.apellidosMedico }}</td>
             </tr>
           </tbody>
         </table>
   
-        <p *ngIf="citasAnteriores.length === 0">No hay historial de citas disponible.</p>
+        <p *ngIf="cantanteriores === 0">No hay historial de citas disponible (solo aparecen a las que halla asistido).</p>
   
-        <button class="btn-historial" (click)="mostrarProximas = true">Ver próximas citas</button>
       </section>
+
+
+      <aside *ngIf="aside">
+
+
+          <h3>Historial de citas</h3>
+
+          <div  class="boton-contenedor">
+            <button class="btn-historial" (click)="ocultar_tabla_citas_proximas()">Ver historial de citas</button>
+          </div>
+        
+      </aside>
     </main>
   
   </div>
