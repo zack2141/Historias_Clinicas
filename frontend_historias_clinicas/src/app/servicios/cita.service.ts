@@ -68,13 +68,19 @@ export class CitaService {
   ingreso_Paciente(
     idcita:number
   ):Observable<any>{
-    return this.httpClient.get(`${this.bdURL}/ingreso_Paciente?id=${idcita}`
+    return this.httpClient.get(`${this.bdURL}/IngresoPaciente?id=${idcita}`
     );
   }
 
  citas_del_Dia(
   ):Observable<any>{
     return this.httpClient.get(`${this.bdURL}/citasdelDia`
+    );
+  }
+
+  citas_del_Dia2(
+  ):Observable<any>{
+    return this.httpClient.get(`${this.bdURL}/citasdelDia2`
     );
   }
 
@@ -92,9 +98,5 @@ export class CitaService {
       return this.httpClient.get(`${this.bdURL}/citasPaciente?fecha1=${fecha}`+
         `&IDpaciente=${idPaciente}`)
     }
-
-
-  
-  
 
 }

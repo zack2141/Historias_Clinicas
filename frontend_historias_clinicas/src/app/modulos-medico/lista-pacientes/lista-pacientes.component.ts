@@ -6,6 +6,7 @@ import { Cita } from '../../entidades/cita';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CitaService } from '../../servicios/cita.service';
+import { LogueosService } from '../../servicios/logueos.service';
 
 @Component({
   selector: 'app-lista-pacientes',
@@ -56,13 +57,15 @@ export class ListaPacientesComponent implements OnInit{
 
   constructor(
     private servicioCitas: CitaService,
-    private router: Router
+    private router: Router,
+    private logueoService: LogueosService
   ) {}
 
   ngOnInit(): void {
     const hoy = new Date();
     this.fechaSeleccionada = hoy.toISOString().split('T')[0];
     this.lista_dia()
+    this.SesionComomedico()
   }
 
  
@@ -122,9 +125,13 @@ export class ListaPacientesComponent implements OnInit{
 
   lista_dia(){
 
-    this.servicioCitas.citas_del_Dia().subscribe(dato =>{
+    this.servicioCitas.citas_del_Dia2().subscribe(dato =>{
       this.lista_citas= dato
     })
+  }
+
+  SesionComomedico() {
+    this.logueoService.setTipoUsuario('medico');
   }
 
 }

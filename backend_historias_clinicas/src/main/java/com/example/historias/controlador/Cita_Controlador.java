@@ -212,6 +212,11 @@ public class Cita_Controlador {
 	    return this.repCi.citasDelDia();
 	}
 	
+	@GetMapping("citasdelDia2")
+	public List<cita> citasDeHoy2() {
+	    return this.repCi.citasDelDia2();
+	}
+	
 
 	
 	@GetMapping("/citasunDia")

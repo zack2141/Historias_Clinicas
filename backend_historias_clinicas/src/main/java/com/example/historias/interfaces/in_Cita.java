@@ -22,5 +22,8 @@ public interface in_Cita extends JpaRepository<cita, Long> {
     List<cita> citasDelDia();
     
     
+    @Query("SELECT c FROM cita c WHERE c.fecha = DATE(CURRENT_DATE) and c.estado = 'Ingresado'")
+    List<cita> citasDelDia2();
+    
 
 }

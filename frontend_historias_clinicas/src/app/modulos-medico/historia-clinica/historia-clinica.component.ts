@@ -8,6 +8,7 @@ import { Cita } from '../../entidades/cita';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common'
 import { Paciente } from '../../entidades/paciente';
+import { LogueosService } from '../../servicios/logueos.service';
 
 
 @Component({
@@ -72,7 +73,8 @@ export class HistoriaClinicaComponent implements OnInit {
   constructor(
     private ServiceHistorial: HistoriaClinicaService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private logueoService: LogueosService
   ) {}
 
   ngOnInit(): void {
@@ -86,6 +88,8 @@ export class HistoriaClinicaComponent implements OnInit {
     } else {
       console.warn("⚠️ No se recibió la cita.");
     }
+
+    this.SesionComomedico()
   }
   
   Guardar_historial(): void {
@@ -121,5 +125,9 @@ export class HistoriaClinicaComponent implements OnInit {
 
   redireccion_lista_pacientes(): void {
     this.router.navigate(['/lista-pacientes']);
+  }
+
+  SesionComomedico() {
+    this.logueoService.setTipoUsuario('medico');
   }
 }
