@@ -20,7 +20,6 @@ export class PacienteService {
   }
 
 
-
   ver_Paciente(id: string): Observable<LoguinPaciente> {
     return this.http.get<LoguinPaciente>(`${this.UrlPaciente}/ObtenerPaciente?id=${id}`);
   }
@@ -28,9 +27,5 @@ export class PacienteService {
   actualizar_Paciente(paciente: LoguinPaciente): Observable<boolean> {
     return this.http.post<boolean>(`${this.UrlPaciente}/ActualizarPaciente`, paciente);
   }
-
- /* buscarPacientePorIdentificacion(identificacion: string): Observable<Paciente> {
-    return this.http.get<Paciente>(`${this.UrlPaciente}/pacientes/${identificacion}`);
-  }*/
 
 }
