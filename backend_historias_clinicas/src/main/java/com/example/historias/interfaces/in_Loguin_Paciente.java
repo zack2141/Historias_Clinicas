@@ -10,6 +10,6 @@ public interface in_Loguin_Paciente extends JpaRepository<loguin_Paciente, Strin
 	    loguin_Paciente findByUsuarioPacienteAndPassword(String usuarioPaciente, String password);
 
 	    loguin_Paciente findByUsuarioPaciente(String usuarioPaciente);
-	}
 
+	}
 

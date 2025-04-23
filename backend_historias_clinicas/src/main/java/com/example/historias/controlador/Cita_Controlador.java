@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.historias.interfaces.In_Medico;
 import com.example.historias.interfaces.in_Cita;
+import com.example.historias.interfaces.in_Loguin_Paciente;
 import com.example.historias.interfaces.in_Paciente;
 import com.example.historias.modelo.cita;
 import com.example.historias.modelo.loguin_Paciente;
@@ -46,6 +47,9 @@ public class Cita_Controlador {
 	
 	@Autowired
 	private In_Medico repME;
+	
+	@Autowired
+	private in_Loguin_Paciente repLoPa;
 	
 	@Autowired
 	private LoguinPaciente conLoPa;// para acceder a los metodos del controlador de LoguinPaciente//
@@ -206,15 +210,20 @@ public class Cita_Controlador {
 	@GetMapping("/citasPaciente")
 	public List<cita> verCitaspaciente(
 	    @RequestParam("fecha1") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
-	    @RequestParam Long IDpaciente
+	    @RequestParam String IDpaciente
 	) {
 	    // Obtenemos todas las citas de esa fecha
 	    List<cita> citasDeLaFecha = this.repCi.findByFecha(fecha);
+	    
+	    paciente persona = this.repLoPa.findByUsuarioPaciente(IDpaciente).getIDpaciente();
 
-	    // Filtramos solo las que pertenecen al paciente solicitado
+	    
+	    //Filtramos solo las que pertenecen al paciente solicitado
 	    return citasDeLaFecha.stream()
-	        .filter(c -> c.getIDpaciente().getIDpaciente().equals(IDpaciente))
+	        .filter(c -> c.getIDpaciente().getIDpaciente().equals(persona.getIDpaciente()) && c.getEstado().equals("Asignada"))
 	        .collect(Collectors.toList());
+	    
+	    
 	}
 	
 	// cita repetida
