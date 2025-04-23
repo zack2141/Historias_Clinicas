@@ -41,7 +41,7 @@ export class ListaCitasComponent implements OnInit{
         edadMedico: ''
       },
       idpaciente: {
-        idPaciente: '',
+        idpaciente: 0,
         nombres: '',
         apellidos: '',
         sexo: '',

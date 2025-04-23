@@ -9,6 +9,7 @@ import { LogueosService } from '../../servicios/logueos.service';
 import Swal from 'sweetalert2';
 import { PacienteService } from '../../servicios/paciente.service';
 import { Cita } from '../../entidades/cita';
+import { LoguinPaciente } from '../../entidades/loguin-paciente';
 
 @Component({
   selector: 'app-agendar-citas',
@@ -36,13 +37,20 @@ export class AgendarCitasComponent implements OnInit {
 
 Medicos!:Medico[];
 med: Medico= new Medico;
-paciente: Paciente = new Paciente;
+paciente :Paciente = new Paciente;
 fecha!:Date;
 hora!:string;
 motivo!:string;
 cargo!:string;
 
-idpaciente!:number
+idpaciente!:string
+
+
+loguinpacinete: LoguinPaciente ={
+  usuarioPaciente :'',
+  idpaciente : this.paciente ,
+  password :''
+}
 
 
 solicitudCita: Cita = {
@@ -68,7 +76,10 @@ paciente_encontrado(){
       })
 
     }else{
-      this.paciente=dato
+      this.loguinpacinete = dato;
+
+      this.paciente= this.loguinpacinete.idpaciente
+      console.log(this.paciente)
     }
 
   })
@@ -98,15 +109,9 @@ sesionComoRecep(){
 
 solicitar_cita_paciente(){
 
-  this.solicitudCita.idpaciente= this.paciente
-  this.solicitudCita.idmedico= this.med
-  this.solicitudCita.fecha= this.fecha
-  this.solicitudCita.motivoCita = this.motivo
-  this.solicitudCita.hora = this.hora
 
-  console.log(this.solicitudCita)
 
-  this.ServiceCita.agendar_cita_recep(this.solicitudCita).subscribe(dato=>{
+  this.ServiceCita.agendar_cita_recep(this.med.idmedico, this.paciente.idpaciente, this.motivo, this.fecha, this.hora).subscribe(dato=>{
     if(dato === true){
       Swal.fire({
         icon: 'success',

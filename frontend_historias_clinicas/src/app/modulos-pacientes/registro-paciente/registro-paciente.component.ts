@@ -23,7 +23,7 @@ export class RegistroPacienteComponent {
     usuarioPaciente: '',
     password: '',
     idpaciente: {
-      idPaciente: '',
+      idpaciente: 0,
       nombres: '',
       apellidos: '',
       sexo: '',

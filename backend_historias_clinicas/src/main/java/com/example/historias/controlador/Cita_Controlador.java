@@ -90,12 +90,25 @@ public class Cita_Controlador {
 
 
 	
-	@PostMapping("/agendarCitaRecep")
+	@GetMapping("/agendarCitaRecep")
 	public boolean agendarCitaRecep(
-	    @RequestBody cita solicitud
+	    @RequestParam String motivo,
+	    @RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
+        @RequestParam String hora,
+        @RequestParam ("medico")Long idMedico,
+        @RequestParam ("paciente")Long idpaciente
 	) {
 		
-		this.repCi.save(solicitud);
+		Optional<medico> medicoOptional = this.repME.findById(idMedico);
+		 medico med = medicoOptional.get();
+		
+		 paciente paci =this.repPA.findById(idpaciente).get();
+		 
+		 recepcionista log = this.conLoRe.recepLogueado;
+		 
+		cita nuevaCita = new cita(motivo, "Asignada", fecha, hora, paci, med, log);
+		
+		this.repCi.save(nuevaCita);
 	    
 		return true;
 	}

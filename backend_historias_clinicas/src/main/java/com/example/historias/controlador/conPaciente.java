@@ -69,8 +69,9 @@ public class conPaciente {
 
 	    //Obtener datos del paciente
 	    @GetMapping("/ObtenerPaciente")
-	    public paciente verPaciente(@RequestParam Long id) {
-	        return repPa.findById(id).orElse(null);
+	    public loguin_Paciente verPaciente(@RequestParam String id) {
+	    	
+	        return this.repLoPa.findByUsuarioPaciente(id);
 	    }
 }
 

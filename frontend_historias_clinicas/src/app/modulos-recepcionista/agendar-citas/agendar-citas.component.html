@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{ paciente.idPaciente }}</td>
+            <td>{{ loguinpacinete.usuarioPaciente }}</td>
             <td>{{ paciente.nombres }}</td>
             <td>{{ paciente.apellidos }}</td>
             <td>{{ paciente.fechaNacimiento}}</td>
@@ -47,41 +47,55 @@
     </div>
   
     <div class="formulario-cita">
-      <div class="campo">
-        <label>Seleccione una fecha</label>
-        <input type="date" [(ngModel)]="fecha"  />
-      </div>
+
+      <div id="cont-campos">
+
+        <div class="campo">
+          <label>Seleccione una fecha</label>
+          <input type="date" [(ngModel)]="fecha"  />
+        </div>
+    
+        <div class="campo">
+          <label>Ingrese una hora disponible</label>
+          <select [(ngModel)]="hora" >
+            <option value="">Seleccione una hora</option>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+             Agrega más horas aquí 
+          </select>
+        </div>
   
-      <div class="campo">
-        <label>Ingrese una hora disponible</label>
-        <select [(ngModel)]="hora" >
-          <option value="">Seleccione una hora</option>
-          <option value="08:00">08:00</option>
-          <option value="09:00">09:00</option>
-          <option value="10:00">10:00</option>
-           Agrega más horas aquí 
-        </select>
-      </div>
-
-      <div class="campo">
-        <label>Ingrese el cargo del medico</label>
-        <select [(ngModel)]="cargo"(change)="medico_encontrado()">
-          <option value="" disabled selected>Seleccione cargo</option>
-          <option value="General">General</option>
-          <option value="Cardiologo">Cardiologo</option>
-          <option value="Urolologo">Urolologo</option>
-
-        </select>
-
-      </div>
+        
+        <div class="campo">
+          <label>Motivo</label>
+          <input type="text" [(ngModel)]="motivo" class="form-control" placeholder="Escriba el motivo de la consulta" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
   
-      <div class="campo">
-        <label>Médico asignado</label>
-        <select [(ngModel)]="med">
-          <option value="" disabled selected>Seleccione un médico</option>
-          <option *ngFor="let m of Medicos" [ngValue]="m">{{ m.nombreMedico }} {{ m.apellidosMedico }}</option>
-        </select>
+        <div class="campo">
+          <label>Ingrese el cargo del medico</label>
+          <select [(ngModel)]="cargo"(change)="medico_encontrado()">
+            <option value="" disabled selected>Seleccione cargo</option>
+            <option value="General">General</option>
+            <option value="Cardiologo">Cardiologo</option>
+            <option value="Urolologo">Urolologo</option>
+  
+          </select>
+  
+        </div>
+  
+    
+        <div class="campo">
+          <label>Médico asignado</label>
+          <select [(ngModel)]="med">
+            <option value="" disabled selected>Seleccione un médico</option>
+            <option *ngFor="let m of Medicos" [ngValue]="m">{{ m.nombreMedico }} {{ m.apellidosMedico }}</option>
+          </select>
+        </div>
+
+
       </div>
+     
   
       <button class="btn-azul" (click)="solicitar_cita_paciente()">Agendar</button>
     </div>

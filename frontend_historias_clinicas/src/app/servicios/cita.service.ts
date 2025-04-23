@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medico } from '../entidades/medico';
 import { Paciente } from '../entidades/paciente';
@@ -32,8 +32,21 @@ export class CitaService {
 
 
  agendar_cita_recep(
-      cita:Cita):Observable<any>{
-        return this.httpClient.post<boolean>(`${this.bdURL}/agendarCitaRecep`,cita);
+      idmed:number,
+      idpaci:number,
+      motivo: string,
+      fecha: Date,
+      hora: string):Observable<any>{
+
+        
+
+        return this.httpClient.get<boolean>(`${this.bdURL}/agendarCitaRecep?`+
+          `motivo=${motivo}&`+
+          `Fecha=${fecha}&`+
+          `hora=${hora}&`+
+          `medico=${idmed}&`+
+          `paciente=${idpaci}`
+        );
         }
 
 

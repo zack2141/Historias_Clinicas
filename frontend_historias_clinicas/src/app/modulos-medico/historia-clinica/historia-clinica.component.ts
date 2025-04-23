@@ -42,7 +42,7 @@ export class HistoriaClinicaComponent implements OnInit {
       edadMedico: ''
     },
     idpaciente: {
-      idPaciente: '',
+      idpaciente: 0,
       nombres: '',
       apellidos: '',
       sexo: '',
