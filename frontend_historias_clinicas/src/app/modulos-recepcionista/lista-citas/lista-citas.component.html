@@ -4,12 +4,17 @@
 
     <h2>Citas</h2>
   
-    <div class="date-selector">
-      <input type="date" [(ngModel)]="fechaSeleccionada"  />
-    </div>
+    <div class="busqueda">
 
-    <input type="text" placeholder="Buscar por ID"  [(ngModel)]="idPaciente"/>
-    <button class="btn-atender" (click)="buscarPaciente()">Buscar Paciente</button>
+      <div class="date-selector">
+        <input type="date" [(ngModel)]="fechaSeleccionada"  />
+      </div>
+  
+      <input type="text" placeholder="Buscar por ID" class="inputid"  [(ngModel)]="idPaciente"/>
+      <button class="btn-atender" (click)="buscarPaciente()">Buscar Paciente</button>
+
+    </div>
+    
 
 
   </div>

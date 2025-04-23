@@ -21,7 +21,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 25px;
-    margin-right: 900px;
+    margin-right: 600px;
     height: 30px;
     padding: 8px 12px;
   }
@@ -45,6 +45,8 @@ body {
   table {
     width: 100%;
     border-collapse: collapse;
+
+    
   }
   
   thead {
@@ -60,15 +62,23 @@ body {
   
   .btn-atender {
     background-color: #d3544b;
-    color: white;
-    padding: 8px 14px;
+    color: #ffffff;
+    width: 150px;
+    height: 40px;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
   }
   
+  .inputid{
+    width: 220px;
+    height: 40px;
+    border-radius: 50px;
+    margin-right: 50px;
+    text-align: center;
+  }
   .btn-atender:hover {
     background-color: #b3423a;
   }
