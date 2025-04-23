@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Paciente } from '../../entidades/paciente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PacienteService } from '../../servicios/paciente.service';
@@ -43,6 +43,20 @@ export class ActualizarPacienteComponent implements OnInit {
   // funcion que muestra la barra de navegacion como paciente
   SesionComoPaciente() {
     this.logueoService.setTipoUsuario('paciente');
+  }
+
+  validar_loguin(formulrio: NgForm){
+
+    if(formulrio.invalid){
+      Swal.fire('Atención', 'debe de llenar todos los campos para actualizar los datos', 'warning');
+
+    }else{
+      this.actualizarPaciente()
+    }
+
+
+
+
   }
 
   actualizarPaciente(): void {
