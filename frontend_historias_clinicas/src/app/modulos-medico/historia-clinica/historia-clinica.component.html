@@ -30,43 +30,43 @@
       </table>
     </div>
   
-    <form (ngSubmit)="Guardar_historial()">
+    <form #formulario="ngForm" (ngSubmit)="validacion_formulario(formulario)">
 
       <div id="cont1">
         <label>Motivo de la consulta</label>
-        <input [(ngModel)]="nueva_historia.motivoCita" name="motivoConsulta"/>
+        <input [(ngModel)]="nueva_historia.motivoCita" name="motivoConsulta" required=""/>
       </div>
       
       <div id="cont2">
         <label>Enfermedades actuales del cita</label>
-        <input [(ngModel)]="nueva_historia.enfermedadPaciente" name="enfermedadesActuales"/>
+        <input [(ngModel)]="nueva_historia.enfermedadPaciente" name="enfermedadesActuales" required=""/>
     
       </div>
      
       <div id="cont3">
         <label>Diagnóstico</label>
-        <input [(ngModel)]="nueva_historia.diagnosticos" name="diagnostico"/>
+        <input [(ngModel)]="nueva_historia.diagnosticos" name="diagnostico" required=""/>
   
       </div>
       
       <div id="cont4">
         <label>Observaciones</label>
-        <textarea [(ngModel)]="nueva_historia.observaciones" name="observaciones"></textarea>
+        <textarea [(ngModel)]="nueva_historia.observaciones" name="observaciones" required=""></textarea>
       </div>
       
       <div id="cont5">
         <label>Exámenes complementarios</label>
-        <input [(ngModel)]="nueva_historia.examenesComplementario" name="examenes"/>
+        <input [(ngModel)]="nueva_historia.examenesComplementario" name="examenes" required=""/>
     </div>
       
       <div id="cont6">
         <label>Medicamentos</label>
-        <input [(ngModel)]="nueva_historia.recetaMedicamentos" name="medicamentos"/>
+        <input [(ngModel)]="nueva_historia.recetaMedicamentos" name="medicamentos" required=""/>
       </div>
       
       <div id="cont7">
         <label>Tratamientos</label>
-        <textarea [(ngModel)]="nueva_historia.tratamientos" name="tratamientos"></textarea>
+        <textarea [(ngModel)]="nueva_historia.tratamientos" name="tratamientos" required=""></textarea>
       </div>
       
       <div id="cont8">

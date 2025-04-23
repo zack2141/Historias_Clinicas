@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { HistoriaClinicaService } from '../../servicios/historia-clinica.service';
 import { Router } from '@angular/router';
 import { HistorialClinico } from '../../entidades/historial-clinico';
@@ -91,12 +91,18 @@ export class HistoriaClinicaComponent implements OnInit {
 
     this.SesionComomedico()
   }
+
+  validacion_formulario(formulario:NgForm){
+    if(formulario.invalid){
+      Swal.fire('Campos incompletos', 'Por favor llena los campos requeridos.', 'warning');
+
+    }
+    else{
+      this.Guardar_historial()
+    }
+  }
   
   Guardar_historial(): void {
-    if ( !this.nueva_historia.diagnosticos) {
-      Swal.fire('Campos incompletos', 'Por favor llena los campos requeridos.', 'warning');
-      return;
-    }
 
   
 
