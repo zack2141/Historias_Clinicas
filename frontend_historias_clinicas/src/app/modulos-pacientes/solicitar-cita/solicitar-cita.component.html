@@ -24,7 +24,7 @@
             
             <td>
               <select [(ngModel)]="hora">
-                <option value="" disabled selected>Seleccione una hora</option>
+                <option selected="true" disabled>Seleccione una hora</option>
                 <option value="08:00">08:00 AM</option>
                 <option value="09:00">09:00 AM</option>
                 <option value="10:00">10:00 AM</option>
@@ -39,7 +39,7 @@
 
             <td>
               <select [(ngModel)]="cargo" (change)="medico_encontrado()">
-                <option value="" disabled selected>Seleccione el cargo</option>
+                <option  selected="true">Seleccione el cargo</option>
                 <option value="General">General</option>
                 <option value="Cardiologo">Cardiologo</option>
                 <option value="Urolologo">Urolologo</option>

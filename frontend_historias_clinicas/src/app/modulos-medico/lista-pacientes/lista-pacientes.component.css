@@ -56,10 +56,14 @@ th, td {
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
   font-size: 15px;
+
+  text-align: center;
 }
 
 .btn-atender {
   background-color: #d3544b;
+
+  width: 80%;
   color: white;
   padding: 8px 14px;
   border: none;
