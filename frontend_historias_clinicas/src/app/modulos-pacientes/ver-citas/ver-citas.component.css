@@ -1,0 +1,142 @@
+/* Estilo general */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+   
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #1a237e;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    align-items: center;
+  }
+  
+  .navbar .logo {
+    font-weight: bold;
+  }
+  
+  .navbar nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .navbar .cerrar-sesion {
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  
+  /* Contenido principal */
+  .contenido {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+  
+  /* Sección próximas citas */
+  .citas-proximas {
+    margin-right: 2rem;
+    width: 60%;
+  }
+  
+  .citas-proximas h2 {
+    margin-bottom: 1rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  thead {
+    background-color: #f3f4f6;
+  }
+  
+  th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+  }
+  
+  .btn-cancelar {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .btn-cancelar:hover {
+    background-color: #dc2626;
+  }
+  
+  /* Sección historial */
+  .historial {
+    flex: 1;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    height: fit-content;
+  }
+  
+  .historial h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .btn-historial {
+    background-color: #3b82f6;
+    color: white;
+
+    
+    border: none;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .btn-historial:hover {
+    background-color: #2563eb;
+  }
+
+  .boton-contenedor{
+    width: 100%;
+    height: 30vh;
+    background-color: white;
+    padding: 10%;
+  }
+
+  .contenido{
+
+    padding: 5%;
+  }
+
+  aside{
+    width:35%
+  }
+
+  #tablahistoria{
+    width: 90%;
+    
+  }
+  
+
+  .citas-anteriores{
+    width: 100%;
+  }

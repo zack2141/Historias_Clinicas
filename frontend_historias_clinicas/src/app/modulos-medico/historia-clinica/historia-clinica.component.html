@@ -1,1 +1,78 @@
-<p>historia-clinica works!</p>
+<div class="contenedor-historia">
+    <h4>Historial médico</h4>
+  
+    <div class="datos-cita">
+      <table >
+
+        <thead>
+          <td><strong>Nombres</strong></td>
+          <td><strong>Apellidos</strong></td>
+          <td><strong>Fecha de nacimiento</strong></td>
+          <td><strong>Sexo</strong></td>
+          <td><strong>Estado Civil</strong></td>
+          <td><strong>Afiliación</strong></td>
+          <td><strong>RH</strong></td>
+        </thead>
+        <tbody>
+
+          <tr >
+          
+            <td>{{ cita.idpaciente.nombres }}</td>
+            <td>{{ cita.idpaciente.apellidos }}</td>
+            <td>{{ cita.idpaciente.fechaNacimiento | date: 'dd-MM-yyyy' }}</td>
+            <td>{{ cita.idpaciente.sexo }}</td>
+            <td>{{ cita.idpaciente.estadoCivil }}</td>
+            <td>{{ cita.idpaciente.afiliacion }}</td>
+            <td>{{ cita.idpaciente.rh }}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  
+    <form #formulario="ngForm" (ngSubmit)="validacion_formulario(formulario)">
+
+      <div id="cont1">
+        <label>Motivo de la consulta</label>
+        <input [(ngModel)]="nueva_historia.motivoCita" name="motivoConsulta" required=""/>
+      </div>
+      
+      <div id="cont2">
+        <label>Enfermedades actuales del cita</label>
+        <input [(ngModel)]="nueva_historia.enfermedadPaciente" name="enfermedadesActuales" required=""/>
+    
+      </div>
+     
+      <div id="cont3">
+        <label>Diagnóstico</label>
+        <input [(ngModel)]="nueva_historia.diagnosticos" name="diagnostico" required=""/>
+  
+      </div>
+      
+      <div id="cont4">
+        <label>Observaciones</label>
+        <textarea [(ngModel)]="nueva_historia.observaciones" name="observaciones" required=""></textarea>
+      </div>
+      
+      <div id="cont5">
+        <label>Exámenes complementarios</label>
+        <input [(ngModel)]="nueva_historia.examenesComplementario" name="examenes" required=""/>
+    </div>
+      
+      <div id="cont6">
+        <label>Medicamentos</label>
+        <input [(ngModel)]="nueva_historia.recetaMedicamentos" name="medicamentos" required=""/>
+      </div>
+      
+      <div id="cont7">
+        <label>Tratamientos</label>
+        <textarea [(ngModel)]="nueva_historia.tratamientos" name="tratamientos" required=""></textarea>
+      </div>
+      
+      <div id="cont8">
+        <button type="submit" id="registro">Registrar</button>
+      </div>
+      
+    </form>
+  </div>
+  

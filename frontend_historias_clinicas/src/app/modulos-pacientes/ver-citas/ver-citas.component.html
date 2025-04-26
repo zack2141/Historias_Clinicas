@@ -1,1 +1,79 @@
-<p>ver-citas works!</p>
+<div>
+  
+    <main class="contenido">
+      <section class="citas-proximas" *ngIf="mostrarProximas">
+        <h2>Próximas citas</h2>
+  
+        <table *ngIf="cantcitas > 0">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Motivo</th>
+              <th>Cargo</th>
+              <th>Médico</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cita of citas">
+              <td>{{ cita.fecha | date: 'MM-dd-yyyy' }}</td>
+              <td>{{ cita.hora }}</td>
+              <td>{{ cita.motivoCita }}</td>
+              <td>{{ cita.idmedico.cargoMedico }}</td>
+              <td>{{ cita.idmedico.nombreMedico }} {{ cita.idmedico.apellidosMedico }}</td>
+              <td>
+                <button class="btn-cancelar" (click)="cancelar_cita(cita.idcita)">Cancelar cita</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <p *ngIf="cantcitas === 0">No tienes citas próximas.</p>
+  
+        
+      </section>
+  
+      <section class="citas-anteriores" *ngIf="!mostrarProximas">
+        <h2>Historial de citas</h2>
+  
+        <table *ngIf="cantanteriores > 0" id="tablahistoria">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Motivo</th>
+              <th>Cargo</th>
+              <th>Médico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cita of citasAnteriores">
+              <td>{{ cita.fecha | date: 'MM-dd-yyyy' }}</td>
+              <td>{{ cita.hora }}</td>
+              <td>{{ cita.motivoCita }}</td>
+              <td>{{ cita.idmedico.cargoMedico }}</td>
+              <td>{{ cita.idmedico.nombreMedico }} {{ cita.idmedico.apellidosMedico }}</td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <p *ngIf="cantanteriores === 0">No hay historial de citas disponible (solo aparecen a las que halla asistido).</p>
+  
+      </section>
+
+
+      <aside *ngIf="aside">
+
+
+          <h3>Historial de citas</h3>
+
+          <div  class="boton-contenedor">
+            <button class="btn-historial" (click)="ocultar_tabla_citas_proximas()">Ver historial de citas</button>
+          </div>
+        
+      </aside>
+    </main>
+  
+  </div>
+  

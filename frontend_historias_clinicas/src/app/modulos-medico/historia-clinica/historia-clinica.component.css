@@ -1,0 +1,166 @@
+
+.contenedor-historia {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+  }
+
+  h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+  
+
+  .datos-paciente table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    font-size: 14px;
+  }
+  
+  .datos-paciente td {
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  
+  .datos-paciente td strong {
+    font-weight: 600;
+    color: #333;
+  }
+  
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+    gap: 16px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+  
+
+  form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: #333;
+  }
+  
+
+  form input,
+  form textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    min-height: 80px;
+  }
+  
+
+  button[type="submit"] {
+    grid-column: 1 / -1;
+    padding: 12px;
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #a93226;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10vh;
+  }
+  
+  thead {
+    background-color: #f5f5f5;
+  }
+  
+  th, td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 15px;
+    text-align: center;
+  }
+
+/* Contenedores del formulario*/
+
+#cont1{
+  grid-column: 1;
+  grid-row: 1;
+
+}
+
+#cont2{
+
+  grid-column: 2;
+  grid-row: 1;
+  
+}
+
+#cont3{
+
+  grid-column: 3;
+  grid-row: 1;
+  
+}
+
+#cont4{
+
+  grid-column: 1;
+  grid-row: 2;
+  
+}
+
+#cont5{
+
+  grid-column: 2;
+  grid-row: 2;
+  
+}
+
+#cont6{
+
+  grid-column: 3;
+  grid-row: 2;
+  
+}
+
+#cont7{
+
+  grid-column: 1;
+  grid-row: 3;
+  
+}
+
+#cont8{
+
+  grid-column: 1/5;
+  grid-row: 4;
+  text-align: center;
+  
+}
+
+#registro{
+  width: 20%;
+}
+
+
+  

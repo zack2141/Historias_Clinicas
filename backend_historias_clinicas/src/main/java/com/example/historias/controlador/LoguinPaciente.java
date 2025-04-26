@@ -14,12 +14,12 @@ import com.example.historias.modelo.paciente;
 
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/Loguin")
 @CrossOrigin(origins = "http://localhost:4200/")
 
 public class LoguinPaciente {
     
-    public paciente usu;
+    public loguin_Paciente usu;
 
     @Autowired
     private in_Loguin_Paciente loguinPacienteRepo;
@@ -28,10 +28,10 @@ public class LoguinPaciente {
     public String validarLogueo(@RequestParam String usuarioPaciente, @RequestParam String password) {
         loguin_Paciente usuario = loguinPacienteRepo.findByUsuarioPacienteAndPassword(usuarioPaciente, password);
         if (usuario != null) {
-            paciente usua = usuario.getIDpaciente();
-            usu = usua;
+            usu = usuario;
+           
 
-            String rol = usua.getRolPaciente();
+            String rol = usu.getIDpaciente().getRolPaciente();
             return rol;
 
         } else {
@@ -52,5 +52,10 @@ public class LoguinPaciente {
     public String cerrarSesion() {
         usu = null;
         return "sesion cerrada correctamente";
+    }
+    
+    @GetMapping ("/obtener")
+    private loguin_Paciente devuelvePaciente() {
+    	return this.usu;
     }
 }

@@ -1,1 +1,31 @@
-<p>lista-pacientes works!</p>
+<div class="main-container">
+  
+
+  <div class="table-container">
+    <h2>Lista de pacientes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Motivo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cita of lista_citas">
+          <td>{{ cita.fecha | date: 'dd-MM-yyyy' }}</td>
+          <td>{{ cita.hora }}</td>
+          <td>{{ cita.idpaciente.nombres }}</td>
+          <td>{{ cita.idpaciente.apellidos }}</td>
+          <td>{{ cita.motivoCita }}</td>
+          <td>
+            <button class="btn-atender" (click)="redireccion_historia(cita)">Atender</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

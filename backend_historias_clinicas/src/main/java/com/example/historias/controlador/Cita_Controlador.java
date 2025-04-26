@@ -10,14 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.historias.interfaces.In_Medico;
 import com.example.historias.interfaces.in_Cita;
+import com.example.historias.interfaces.in_Loguin_Paciente;
 import com.example.historias.interfaces.in_Paciente;
 import com.example.historias.modelo.cita;
+import com.example.historias.modelo.loguin_Paciente;
 import com.example.historias.modelo.medico;
 import com.example.historias.modelo.paciente;
 import com.example.historias.modelo.recepcionista;
@@ -45,6 +49,9 @@ public class Cita_Controlador {
 	private In_Medico repME;
 	
 	@Autowired
+	private in_Loguin_Paciente repLoPa;
+	
+	@Autowired
 	private LoguinPaciente conLoPa;// para acceder a los metodos del controlador de LoguinPaciente//
 	
 	@Autowired
@@ -62,85 +69,71 @@ public class Cita_Controlador {
 	@GetMapping("/agendarCitaPaciente")
 	public boolean agendarCitaPaciente(
 	        @RequestParam String motivo,
-	        @RequestParam("Fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
+	        @RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
 	        @RequestParam String hora,
-	        @RequestParam medico medicoId) {
-	
-	paciente paci = this.conLoPa.usu;
-		
-   
-		
-	    Optional<medico> medicoOptional = this.repME.findById(medicoId.getIDMedico());
-	    if (!medicoOptional.isPresent()){
-	   return false;
-	   }
+	        @RequestParam ("medico")Long idMedico) {
+
+		loguin_Paciente paci = this.conLoPa.usu;
+
+	    Optional<medico> medicoOptional = this.repME.findById(idMedico);
+	    if (!medicoOptional.isPresent()) {
+	        return false;
+	    }
+
 	    medico med = medicoOptional.get();
-	    
-	    // Crear y guardar la nueva cita (el estado lo podés mapear si es numérico)
-	    cita nuevaCita = new cita(motivo, "asignada", fecha, hora, paci, med, null);
+
+	    cita nuevaCita = new cita(motivo, "Asignada", fecha, hora, paci.getIDpaciente(), med, null);
 	    this.repCi.save(nuevaCita);
 
 	    return true;
 	}
+
 
 	
 	@GetMapping("/agendarCitaRecep")
 	public boolean agendarCitaRecep(
 	    @RequestParam String motivo,
-	    @RequestParam("Fecha") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
-	    @RequestParam String hora,
-	    @RequestParam medico IDMedico, 
-	    @RequestParam paciente IDPaciente
+	    @RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
+        @RequestParam String hora,
+        @RequestParam ("medico")Long idMedico,
+        @RequestParam ("paciente")Long idpaciente
 	) {
-	    // Obtener al recepcionista logueado
-	    recepcionista recep = this.conLoRe.recepLogueado;
-
-	    if (recep == null) {
-	        return false; // no hay recepcionista logueado
-	    }
-
-
-
-	    // Buscar al médico y paciente por ID
-	    Optional<medico> medicoOptional = this.repME.findById(IDMedico.getIDMedico());
-	    Optional<paciente> pacienteOptional = this.repPA.findById(IDPaciente.getIDpaciente());
-
-	    // Validar que el médico y el paciente existen
-	    if (!medicoOptional.isPresent() || !pacienteOptional.isPresent()) {
-	        return false;
-	    }
-
-	    medico med = medicoOptional.get();
-	    paciente pac = pacienteOptional.get();
-
-	   
-	    cita nuevaCita = new cita(motivo, "asignada", fecha, hora, pac, med, recep);
-	    this.repCi.save(nuevaCita);
-
-	    return true;
+		
+		Optional<medico> medicoOptional = this.repME.findById(idMedico);
+		 medico med = medicoOptional.get();
+		
+		 paciente paci =this.repPA.findById(idpaciente).get();
+		 
+		 recepcionista log = this.conLoRe.recepLogueado;
+		 
+		cita nuevaCita = new cita(motivo, "Asignada", fecha, hora, paci, med, log);
+		
+		this.repCi.save(nuevaCita);
+	    
+		return true;
 	}
 	
 	@GetMapping("citasProximas")
 	public List<cita>citasProximas(){
 		
-		paciente paci = this.conLoPa.usu;
+		paciente paci = this.conLoPa.usu.getIDpaciente();
 		
 	
 		
-		return this.repCi.findByIDpacienteAndEstado(paci,"pendiente");
+		return this.repCi.findByIDpacienteAndEstado(paci,"Asignada");
 		
 		}
 	
 	@GetMapping("citasSolicitadas")
 	public List<cita>citasSolicitadas(){
 		
-		paciente paci = this.conLoPa.usu;
+		paciente paci = this.conLoPa.usu.getIDpaciente();
 		
-		return this.repCi.findByIDpacienteAndEstado(paci,"asignada");
+		return this.repCi.findByIDpacienteAndEstado(paci,"Atendida");
 		
 		}
 	
-	@GetMapping("cancelarCita")
+	@GetMapping("/cancelarCita")
 	public boolean cancelarCita(
 			@RequestParam Long id) {
 		
@@ -157,13 +150,10 @@ public class Cita_Controlador {
 	@GetMapping("/ListaPacientesPorFecha")
 	public List<cita> verListaPacientes(
 	    
-	        @RequestParam("fecha1") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha) {
+	        @RequestParam("fecha1") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha) {
 
 	 
-        medico medi = this.conLoMe.medic;
-	    if (medi ==null) {
-	        return new ArrayList<>(); // Retorna lista vacía si el médico no existe
-	    }
+        medico medi = this.conLoMe.medic.getIDmedico();
 
 	   
 
@@ -188,7 +178,7 @@ public class Cita_Controlador {
 		
 		cita ingreso=this.repCi.findById(id).get();
 		
-		ingreso.setEstado("ingresado");
+		ingreso.setEstado("Ingresado");
 		
 		this.repCi.save(ingreso);
 		
@@ -202,7 +192,7 @@ public class Cita_Controlador {
 		
 		cita asistencia=this.repCi.findById(id).get();
 		
-		asistencia.setEstado("atendido");
+		asistencia.setEstado("Atendida");
 		
 		this.repCi.save(asistencia);
 		
@@ -213,6 +203,11 @@ public class Cita_Controlador {
 	@GetMapping("citasdelDia")
 	public List<cita> citasDeHoy() {
 	    return this.repCi.citasDelDia();
+	}
+	
+	@GetMapping("citasdelDia2")
+	public List<cita> citasDeHoy2() {
+	    return this.repCi.citasDelDia2();
 	}
 	
 
@@ -227,18 +222,38 @@ public class Cita_Controlador {
 	
 	@GetMapping("/citasPaciente")
 	public List<cita> verCitaspaciente(
-	    @RequestParam("fecha1") @DateTimeFormat(pattern = "dd/MM/yyyy") Date fecha,
-	    @RequestParam Long IDpaciente
+	    @RequestParam("fecha1") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
+	    @RequestParam String IDpaciente
 	) {
 	    // Obtenemos todas las citas de esa fecha
 	    List<cita> citasDeLaFecha = this.repCi.findByFecha(fecha);
+	    
+	    paciente persona = this.repLoPa.findByUsuarioPaciente(IDpaciente).getIDpaciente();
 
-	    // Filtramos solo las que pertenecen al paciente solicitado
+	    
+	    //Filtramos solo las que pertenecen al paciente solicitado
 	    return citasDeLaFecha.stream()
-	        .filter(c -> c.getIDpaciente().getIDpaciente().equals(IDpaciente))
+	        .filter(c -> c.getIDpaciente().getIDpaciente().equals(persona.getIDpaciente()) && c.getEstado().equals("Asignada"))
 	        .collect(Collectors.toList());
+	    
+	    
 	}
 	
+	// cita repetida
+	
+	@GetMapping("/citarepetida")
+	public boolean citarepedita (
+			@RequestParam("Fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha ) {
+		
+		cita dato = this.repCi.findByIDpacienteAndFechaAndEstado(this.conLoPa.usu.getIDpaciente(), fecha,"Asignada");
+		
+		if(dato != null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 	
 
 	}

@@ -12,7 +12,8 @@ import com.example.historias.modelo.loguin_Recepcionista;
 import com.example.historias.modelo.recepcionista;
 
 @RestController
-@RequestMapping("/loguin/Recepcionista")
+@RequestMapping("/Loguin")
+
 @CrossOrigin(origins = "http://localhost:4200/")
 
 public class conLoguinRecepcionista {
@@ -23,7 +24,7 @@ public class conLoguinRecepcionista {
 	    private in_Loguin_Recepcionista repLoRe;
 	    
 	    
-	    @GetMapping("/Logueo")
+	    @GetMapping("/LogueoRecepcionista")
 	    public String validarLogueo(@RequestParam String usuarioRecep, @RequestParam String passwordRecep) {
 	        loguin_Recepcionista login = repLoRe.findByUsuarioRecepAndPasswordRecep(usuarioRecep, passwordRecep);
 

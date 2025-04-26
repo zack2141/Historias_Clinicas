@@ -12,12 +12,12 @@ import com.example.historias.modelo.loguin_Medico;
 import com.example.historias.modelo.medico;
 
 @RestController
-@RequestMapping("/log/Medico")
+@RequestMapping("/Loguin")
 @CrossOrigin(origins = "http://localhost:4200/")
 
 public class LoguinMedico {
 	
-	public medico medic;
+	public loguin_Medico medic;
 	
 	
 	    @Autowired
@@ -27,10 +27,10 @@ public class LoguinMedico {
 	    public String validarLogueo(@RequestParam String usuarioMedico, @RequestParam String passwordMedico) {
 	        loguin_Medico medico = loguinMedicoRepo.findByUsuarioMedicoAndPasswordMedico(usuarioMedico, passwordMedico);
 	        if (medico != null) {
-	        	medico  medi= medico.getIDmedico();
-	            medic=medi;
+	        	
+	            medic=medico;
 	            
-	            String rol =medi.getRolMedico();
+	            String rol =medico.getIDmedico().getRolMedico();
 	            return rol;
 	            
 	        } else {

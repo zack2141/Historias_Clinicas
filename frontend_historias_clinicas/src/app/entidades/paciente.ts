@@ -1,6 +1,6 @@
 export class Paciente {
 
-    idPaciente !:String
+    idpaciente !:number
     nombres !:String
     apellidos !:String
     sexo !:String

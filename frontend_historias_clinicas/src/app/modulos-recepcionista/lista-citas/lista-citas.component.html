@@ -1,1 +1,48 @@
-<p>lista-citas works!</p>
+<div class="main-container">
+
+  <div class="busqueda">
+
+    <h2>Citas</h2>
+  
+    <div class="busqueda">
+
+      <div class="date-selector">
+        <input type="date" [(ngModel)]="fechaSeleccionada"  />
+      </div>
+  
+      <input type="text" placeholder="Buscar por ID" class="inputid"  [(ngModel)]="idPaciente"/>
+      <button class="btn-atender" (click)="buscarPaciente()">Buscar Paciente</button>
+
+    </div>
+    
+
+
+  </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Medico</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of lista_citas">
+            <td>{{ cita.fecha | date: 'dd-MM-yyyy' }}</td>
+            <td>{{ cita.hora }}</td>
+            <td>{{ cita.idpaciente.nombres }}</td>
+            <td>{{ cita.idpaciente.apellidos }}</td>
+            <td>{{ cita.idmedico.nombreMedico }} {{ cita.idmedico.apellidosMedico }}</td>
+            <td>
+              <button class="btn btn-primary ingreso" (click)="registro_ingreso(cita.idcita)">ingreso</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

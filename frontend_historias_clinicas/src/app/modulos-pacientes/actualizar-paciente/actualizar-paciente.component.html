@@ -1,1 +1,91 @@
-<p>actualizar-paciente works!</p>
+<div class="container">
+    <h2>Mi perfil</h2>
+    <form #formulario="ngForm" (ngSubmit)="validar_loguin(formulario)">
+      
+  
+        <div class="columna1">
+
+          <div class="form-group">
+            <label>No. del Documento:</label>
+            <input type="text"  class="form-control" [(ngModel)]="paciente.usuarioPaciente" name="idPaciente" required="">
+          </div>
+
+          <div class="form-group">
+            <label>Sexo:</label>
+            <select [(ngModel)]="paciente.idpaciente.sexo"   class="form-control" name="sexo" required="">
+              <option value="">Seleccione su sexo</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Correo:</label>
+            <input type="email"  class="form-control" [(ngModel)]="paciente.idpaciente.correo" name="correo" required="">
+          </div>
+    
+          <div class="form-group">
+            <label>Dirección:</label>
+            <input type="text"  class="form-control" [(ngModel)]="paciente.idpaciente.direccion" name="direccion" required="">
+          </div>
+
+        </div>
+
+        <div class="columna2">
+
+          <div class="form-group">
+            <label>Nombres:</label>
+            <input type="text"  class="form-control" [(ngModel)]="paciente.idpaciente.nombres" name="nombres" required="">
+          </div>
+
+          <div class="form-group">
+            <label>Estado civil:</label>
+            <input type="text"  class="form-control" [(ngModel)]="paciente.idpaciente.estadoCivil" name="estadoCivil" required="">
+          </div>
+
+          <div class="form-group">
+            <label>Fecha de nacimiento:</label>
+            <input type="date"  class="form-control" [(ngModel)]="paciente.idpaciente.fechaNacimiento" name="fechaNacimiento" required="">
+          </div>
+
+            <div class="form-group">
+              <label>RH:</label>
+              <input type="text"  class="form-control" [(ngModel)]="paciente.idpaciente.rh" name="rh" required="">
+            </div>
+
+        </div>
+
+        <div class="columna3">
+
+          <div class="form-group">
+            <label>Apellidos:</label>
+            <input type="text"  class="form-control" [(ngModel)]="paciente.idpaciente.apellidos" name="apellidos" required>
+          </div>
+
+          <div class="form-group">
+            <label>Teléfono:</label>
+            <input type="text"  class="form-control" [(ngModel)]="paciente.idpaciente.telefono" name="telefono" required="">
+          </div>
+
+          <div class="form-group">
+            <label>Afiliación:</label>
+            <input type="text"  class="form-control" [(ngModel)]="paciente.idpaciente.afiliacion" name="afiliacion"required="">
+          </div>
+
+          <div class="form-group">
+            <label >Contraseña:</label>
+            <input type="password"  class="form-control" [(ngModel)]="paciente.password" name="afiliacion" required="">
+          </div>
+
+        </div>
+  
+        
+      <div class="botones">
+        <button type="submit">Actualizar datos</button>
+      </div>
+  
+      
+    </form>
+  </div>
+  
